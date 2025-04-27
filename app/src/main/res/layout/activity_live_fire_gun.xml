@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/firing_revolver_gun"
+    tools:context=".LiveFireGun"
+    tools:visibility="visible">
+
+    <Button
+        android:id="@+id/playNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
+        android:width="190sp"
+        android:height="37sp"
+        android:backgroundTint="@color/red"
+        android:onClick="playNormal"
+        android:text="@string/playNormal"
+        android:textColorLink="@color/textColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="89dp"
+        android:width="100sp"
+        android:height="37sp"
+        android:backgroundTint="@color/red"
+        android:onClick="exit"
+        android:text="@string/exit"
+        android:textColorLink="@color/textColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tryAgain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/tryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="120sp"
+        android:height="37sp"
+        android:backgroundTint="@color/red"
+        android:onClick="tryAgain"
+        android:text="@string/tryAgain"
+        android:textColorLink="@color/textColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/conclusion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton"
+        android:shadowColor="@color/black"
+        android:text="@string/playerDies"
+        android:textColor="@color/red"
+        android:textSize="35sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.346"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

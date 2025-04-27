@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Rock,Paper,Scissors?</string>
+    <string name="welcome_message">Two-Hand Rock Paper Scissors</string>
+    <string name="shortIntro">\"The Ultimate Battle of Wits.\"\n
+        Choose your hands wisely, outsmart your\n
+opponents, and control your destiny. High-stakes\n
+challenge where the thrill of life changing decisions\n
+are always at play. The clock is ticking, will\n
+you win or fall to the games mystery.</string>
+    <string name="play">Play</string>
+    <string name="exit">Exit</string>
+    <string name="normalMode">Normal Mode</string>
+    <string name="russianMode">Russian Roulette</string>"
+    <string name="loadingText">Starting your game…</string>
+    <string name="enemyChoosing2">Enemy is now choosing two weapons…</string>
+    <string name="enemyChoosing1">Enemy is now choosing their final weapon…</string>
+    <string name="enemyChosen">Enemy has chosen their two weapons as…</string>
+    <string name="rock">Rock</string>
+    <string name="paper">Paper</string>
+    <string name="scissor">Scissor</string>
+    <string name="chooseWeapon">Choose your first two weapons!</string>
+    <string name="forfeit">Forfeit</string>
+    <string name="throwHand">Throw Hands</string>
+    <string name="finalThrow">Throw Hand</string>
+    <string name="playerChosen">You have selected your two weapons as…</string>"
+    <string name="finalPick">PICK YOUR FINAL WEAPON</string>
+    <string name="pickFinal">Pick your final weapon…</string>
+    <string name="enemyPicking">Enemy is now choosing their final weapon…</string>
+    <string name="promptFinalWeapons">Your Weapons Are…</string>
+    <string name="lose">You Lose!</string>
+    <string name="win">You Win!</string>
+    <string name="tie">It\'s a Tie!</string>
+    <string name="tryAgain">Try Again!</string>
+    <string name="playRR">Play Russian Roulette</string>
+
+    <!--    For Russian Roulette Mode -->
+    <string name="round">Round: </string>
+    <string name="chance_of_death">Probability of death upon losing: </string>
+    <string name="tieRR">As the round resulted in a tie, the current round will start again and no shots will be fired.</string>
+    <string name="blankShot">The shot is blank, how sad that no one died.</string>
+    <string name="continueRound">The game will proceed with another round.</string>
+    <string name="playerDies">You Died!</string>
+    <string name="enemyDies">The enemy dies, You Win!</string>
+    <string name="playNormal">Play Normal Mode</string>
+
+
+</resources>

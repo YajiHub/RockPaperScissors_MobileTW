@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainColor"
+    tools:context=".NormalMode"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="-5dp">
+
+    <ImageView
+        android:id="@+id/throwButton"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="throwHands"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerChosen"
+        app:srcCompat="@drawable/playbutt" />
+
+    <TextView
+        android:id="@+id/playerChosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="106dp"
+        android:background="@drawable/rounded_background"
+        android:fontFamily="@font/rajdhani"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"
+        android:text="@string/chooseWeapon"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paperBG3" />
+
+    <ImageButton
+        android:id="@+id/paperBG3"
+        android:layout_width="91.27dp"
+        android:layout_height="130.6dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="isChosen"
+        android:tag="3"
+        app:layout_constraintBottom_toBottomOf="@+id/rockBG"
+        app:layout_constraintEnd_toStartOf="@+id/rockBG"
+        app:layout_constraintStart_toEndOf="@+id/cardButton1"
+        app:layout_constraintTop_toTopOf="@+id/rockBG" />
+
+    <ImageView
+        android:id="@+id/paperImage3"
+        android:layout_width="85dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/rockText4"
+        app:layout_constraintEnd_toEndOf="@+id/paperBG3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/paperBG3"
+        app:layout_constraintTop_toTopOf="@+id/paperBG3"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/scissor" />
+
+    <TextView
+        android:id="@+id/rockText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/black_ops_one"
+        android:shadowColor="@color/black"
+        android:shadowRadius="2"
+        android:tag="2"
+        android:text="@string/scissor"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/rockBG"
+        app:layout_constraintEnd_toEndOf="@+id/paperBG3"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="@+id/paperBG3" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="12dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/buttonColor"
+        android:foregroundTint="@color/buttonColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageView
+        android:id="@+id/enemyCard2"
+        android:layout_width="91.27dp"
+        android:layout_height="130.6dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toStartOf="@+id/enemyCard3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/enemyCard1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/backpart" />
+
+    <ImageView
+        android:id="@+id/enemyCard1"
+        android:layout_width="91.27dp"
+        android:layout_height="130.6dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="148dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toStartOf="@+id/enemyCard2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/backpart" />
+
+    <ImageView
+        android:id="@+id/enemyCard3"
+        android:layout_width="91.27dp"
+        android:layout_height="130.6dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toEndOf="@+id/enemyCard2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/backpart" />
+
+    <TextView
+        android:id="@+id/enemyIsChoosingPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_background"
+        android:fontFamily="@font/rajdhani"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2dp"
+        android:text="@string/enemyChoosing2"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/enemyCard2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="12dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/buttonColor"
+        android:foregroundTint="@color/buttonColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageButton
+        android:id="@+id/rockBG"
+        android:layout_width="91.27dp"
+        android:layout_height="130.6dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="116dp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="isChosen"
+        android:tag="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/rockImage"
+        android:layout_width="85dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintEnd_toEndOf="@+id/rockBG"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/rockBG"
+        app:layout_constraintTop_toTopOf="@+id/rockBG"
+        app:srcCompat="@drawable/rock" />
+
+    <TextView
+        android:id="@+id/rockText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/black_ops_one"
+        android:shadowColor="@color/black"
+        android:shadowRadius="2"
+        android:tag="1"
+        android:text="@string/rock"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/rockBG"
+        app:layout_constraintEnd_toEndOf="@+id/rockBG"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="@+id/rockBG" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="409dp"
+        android:layout_height="12dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/buttonColor"
+        android:foregroundTint="@color/buttonColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageButton
+        android:id="@+id/cardButton1"
+        android:layout_width="91.27dp"
+        android:layout_height="130.6dp"
+        android:layout_marginStart="38dp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="isChosen"
+        android:tag="2"
+        app:layout_constraintBottom_toBottomOf="@+id/paperBG3"
+        app:layout_constraintEnd_toStartOf="@+id/paperBG3"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/chosenText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/black_ops_one"
+        android:shadowColor="@color/black"
+        android:shadowRadius="2"
+        android:tag="1"
+        android:text="@string/paper"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/cardButton1"
+        app:layout_constraintEnd_toEndOf="@+id/cardButton1"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="@+id/cardButton1" />
+
+    <ImageView
+        android:id="@+id/chosenImg1"
+        android:layout_width="85dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="6dp"
+        app:layout_constraintEnd_toEndOf="@+id/cardButton1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/cardButton1"
+        app:layout_constraintTop_toTopOf="@+id/cardButton1"
+        app:srcCompat="@drawable/paper" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="409dp"
+        android:layout_height="12dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/buttonColor"
+        android:foregroundTint="@color/buttonColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageView
+        android:id="@+id/forfeitButton"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="forfeitGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerChosen"
+        app:srcCompat="@drawable/backplay" />
+
+    <TextView
+        android:id="@+id/forfeitText"
+        android:layout_width="39dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/anton"
+        android:text="@string/forfeit"
+        android:textColor="@color/paragraph"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/forfeitButton"
+        app:layout_constraintStart_toEndOf="@+id/forfeitButton"
+        app:layout_constraintTop_toTopOf="@+id/forfeitButton" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="61dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="5dp"
+        android:fontFamily="@font/anton"
+        android:text="@string/throwHand"
+        android:textColor="@color/paragraph"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/throwButton"
+        app:layout_constraintEnd_toStartOf="@+id/throwButton"
+        app:layout_constraintTop_toTopOf="@+id/throwButton" />
+
+    <TextView
+        android:id="@+id/paperChosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/cardButton1"
+        app:layout_constraintEnd_toEndOf="@+id/cardButton1"
+        app:layout_constraintStart_toStartOf="@+id/cardButton1"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <TextView
+        android:id="@+id/scissorChosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/paperBG3"
+        app:layout_constraintEnd_toEndOf="@+id/paperBG3"
+        app:layout_constraintStart_toStartOf="@+id/paperBG3"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <TextView
+        android:id="@+id/rockChosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/rockBG"
+        app:layout_constraintEnd_toEndOf="@+id/rockBG"
+        app:layout_constraintStart_toStartOf="@+id/rockBG"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <!--Russian Roulette Mode Additional-->
+    <TextView
+        android:id="@+id/round"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:fontFamily="@font/anton"
+        android:shadowColor="@color/black"
+        android:text="@string/round"
+        android:textColor="@color/red"
+        android:textSize="34.35sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/divider2"
+        app:layout_constraintEnd_toEndOf="@+id/divider2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/divider2"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/probability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/anton"
+        android:shadowColor="@color/black"
+        android:text="@string/chance_of_death"
+        android:textColor="@color/red"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/round"
+        app:layout_constraintEnd_toEndOf="@+id/round"
+        app:layout_constraintStart_toStartOf="@+id/round"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/timerContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/forfeitText"
+        app:layout_constraintTop_toBottomOf="@+id/playerChosen">
+
+        <ProgressBar
+            android:id="@+id/countdown"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="67dp"
+            android:layout_height="61dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="100"
+            android:progressBackgroundTint="@color/mainColor"
+            android:progressDrawable="@drawable/circular_progress"
+            android:rotation="270" />
+
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/anton"
+            android:text="7"
+            android:textColor="@color/red"
+            android:textSize="25sp" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainColor"
+    tools:context=".showFinalHands">
+
+    <TextView
+        android:id="@+id/round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anton"
+        android:shadowColor="@color/black"
+        android:text="@string/promptFinalWeapons"
+        android:textColor="@color/textColor"
+        android:textSize="34.35sp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider7"
+        app:layout_constraintEnd_toEndOf="@+id/divider7"
+        app:layout_constraintStart_toStartOf="@+id/divider7"
+        app:layout_constraintTop_toTopOf="@+id/divider7" />
+
+    <ImageButton
+        android:id="@+id/finalEnemyCard"
+        android:layout_width="91.27dp"
+        android:layout_height="130.6dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/buttonColor"
+        android:tag="2"
+        app:layout_constraintBottom_toTopOf="@+id/divider7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/finalEnemyChosen"
+        android:layout_width="85dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="6dp"
+        android:tag="1"
+        app:layout_constraintEnd_toEndOf="@+id/finalEnemyCard"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/finalEnemyCard"
+        app:layout_constraintTop_toTopOf="@+id/finalEnemyCard"
+        app:srcCompat="@drawable/paper" />
+
+    <TextView
+        android:id="@+id/enemyFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/black_ops_one"
+        android:shadowColor="@color/black"
+        android:shadowRadius="2"
+        android:tag="1"
+        android:text="@string/paper"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/finalEnemyCard"
+        app:layout_constraintEnd_toEndOf="@+id/finalEnemyCard"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="@+id/finalEnemyCard" />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="409dp"
+        android:layout_height="12dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/buttonColor"
+        android:foregroundTint="@color/buttonColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageButton
+        android:id="@+id/finalPlayerChosen"
+        android:layout_width="91.27dp"
+        android:layout_height="130.6dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/buttonColor"
+        android:tag="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+    <ImageView
+        android:id="@+id/finalPlayerCard"
+        android:layout_width="85dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="6dp"
+        android:tag="1"
+        app:layout_constraintEnd_toEndOf="@+id/finalPlayerChosen"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/finalPlayerChosen"
+        app:layout_constraintTop_toTopOf="@+id/finalPlayerChosen"
+        app:srcCompat="@drawable/paper" />
+
+    <TextView
+        android:id="@+id/playerFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/black_ops_one"
+        android:shadowColor="@color/black"
+        android:shadowRadius="2"
+        android:tag="1"
+        android:text="@string/paper"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/finalPlayerChosen"
+        app:layout_constraintEnd_toEndOf="@+id/finalPlayerChosen"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="@+id/finalPlayerChosen" />
+
+    <Button
+        android:id="@+id/tryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="120sp"
+        android:height="37sp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="tryAgain"
+        android:text="@string/tryAgain"
+        android:textColorLink="@color/textColor"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playRR"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:width="100sp"
+        android:height="37sp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="exit"
+        android:text="@string/exit"
+        android:textColorLink="@color/textColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finalPlayerChosen"
+        app:layout_constraintVertical_bias="0.13"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/playRR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="190sp"
+        android:height="37sp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="playRR"
+        android:text="@string/playRR"
+        android:textColorLink="@color/textColor"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exit"
+        tools:visibility="invisible" />
+
+    <!--    Russian Roulette Mode Additional Views -->
+    <TextView
+        android:id="@+id/TieWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:fontFamily="@font/anton"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:shadowColor="@color/black"
+        android:text="@string/tieRR"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="18.35sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/finalEnemyCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
