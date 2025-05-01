@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/throwButton"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="43dp"
         android:layout_marginBottom="32dp"
         android:onClick="throwHands"
@@ -292,8 +292,8 @@
 
     <ImageView
         android:id="@+id/forfeitButton"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="43dp"
         android:layout_marginBottom="32dp"
         android:onClick="forfeitGame"

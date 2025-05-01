@@ -26,13 +26,6 @@ public class Computer_Player extends Player{
         return hand[index];
     }
 
-//    @Override
-//    public void generateHands(){
-//        int hand1 = random.nextInt(3) + 1;
-//        int hand2 = random.nextInt(3) + 1;
-//
-//        super.setPlayerHands(hand1, hand2);
-//    }
 
 
     @Override
