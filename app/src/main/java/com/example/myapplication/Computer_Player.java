@@ -2,12 +2,14 @@ package com.example.myapplication;
 
 import java.util.Random;
 
-public class Computer_Player extends Player{
+public class Computer_Player extends Player {
     static Random random = new Random();
 
-
-    public Hand getCounterHand(Hand hand){
-        switch(hand){
+    /**
+     * Returns the hand that would beat the given hand
+     */
+    public Hand getCounterHand(Hand hand) {
+        switch(hand) {
             case ROCK:
                 return Hand.PAPER;
             case PAPER:
@@ -18,7 +20,10 @@ public class Computer_Player extends Player{
         return null;
     }
 
-    public Hand chooseRandomHand(Hand hand1, Hand hand2){
+    /**
+     * Randomly chooses between two hands
+     */
+    public Hand chooseRandomHand(Hand hand1, Hand hand2) {
         Hand[] hand = new Hand[2];
         hand[0] = hand1;
         hand[1] = hand2;
@@ -26,36 +31,72 @@ public class Computer_Player extends Player{
         return hand[index];
     }
 
-
-
     @Override
-    public void pickFinalHand(Hand playerHand1, Hand playerHand2){
-        int thisHand1 = this.getHand1().getHandNumber();
-        int thisHand2 = this.getHand2().getHandNumber();
-        if(thisHand1 == thisHand2){
-            super.setFinalHand(thisHand1);
+    public void pickFinalHand(Hand playerHand1, Hand playerHand2) {
+        Hand thisHand1 = this.getHand1();
+        Hand thisHand2 = this.getHand2();
+
+        // If computer has same hand for both choices, no decision needed
+        if (thisHand1 == thisHand2) {
+            super.setFinalHand(thisHand1.getHandNumber());
             return;
-        //closing of if
-        }
-        if(playerHand1.getHandNumber() == playerHand2.getHandNumber()){
-            Hand strongestCounter = this.getCounterHand(playerHand1);
-            if(this.getHand1() == strongestCounter){
-                super.setFinalHand(thisHand1);
-            }
-            else if(this.getHand2() == strongestCounter){
-                super.setFinalHand(thisHand2);
-            }else{
-                super.setFinalHand(chooseRandomHand(this.getHand1(), this.getHand2()).getHandNumber());
-            }
-        //closing of if
         }
 
-        super.setFinalHand(chooseRandomHand(this.getHand1(), this.getHand2()).getHandNumber());
+        // If player has the same hand for both choices, try to counter it
+        if (playerHand1 == playerHand2) {
+            Hand strongestCounter = getCounterHand(playerHand1);
+            if (thisHand1 == strongestCounter) {
+                super.setFinalHand(thisHand1.getHandNumber());
+                return;
+            } else if (thisHand2 == strongestCounter) {
+                super.setFinalHand(thisHand2.getHandNumber());
+                return;
+            }
+            // If we can't counter, we'll fall through to the strategic choice below
+        }
 
-        //closing of method
+        // Strategic decision making when player has different hands or we don't have a direct counter
+
+        // Calculate scores for each of our hands against the player's hands
+        int hand1Score = evaluateHand(thisHand1, playerHand1, playerHand2);
+        int hand2Score = evaluateHand(thisHand2, playerHand1, playerHand2);
+
+        // Choose the hand with the better score
+        if (hand1Score > hand2Score) {
+            super.setFinalHand(thisHand1.getHandNumber());
+        } else if (hand2Score > hand1Score) {
+            super.setFinalHand(thisHand2.getHandNumber());
+        } else {
+            // Scores are equal, choose randomly
+            super.setFinalHand(chooseRandomHand(thisHand1, thisHand2).getHandNumber());
+        }
     }
 
+    /**
+     * Evaluates a hand against both player hands and returns a score
+     * Win = +1, Tie = 0, Loss = -1
+     * Best possible score is +2 (wins against both player hands)
+     * Worst possible score is -2 (loses to both player hands)
+     */
+    private int evaluateHand(Hand computerHand, Hand playerHand1, Hand playerHand2) {
+        return compareHands(computerHand, playerHand1) + compareHands(computerHand, playerHand2);
+    }
 
-
-
+    /**
+     * Compares two hands and returns:
+     * +1 if computer hand wins
+     * 0 if it's a tie
+     * -1 if computer hand loses
+     */
+    private int compareHands(Hand computerHand, Hand playerHand) {
+        if (computerHand == playerHand) {
+            return 0; // Tie
+        } else if ((computerHand == Hand.ROCK && playerHand == Hand.SCISSOR) ||
+                (computerHand == Hand.SCISSOR && playerHand == Hand.PAPER) ||
+                (computerHand == Hand.PAPER && playerHand == Hand.ROCK)) {
+            return 1; // Computer wins
+        } else {
+            return -1; // Computer loses
+        }
+    }
 }
