@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainColor"
+    tools:context=".SettingsActivity">
+
+    <TextView
+        android:id="@+id/settingsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/anton"
+        android:shadowColor="@color/black"
+        android:shadowRadius="2"
+        android:text="SETTINGS"
+        android:textColor="@color/textColor"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Sound Settings -->
+    <TextView
+        android:id="@+id/soundTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/black_ops_one"
+        android:shadowColor="@color/black"
+        android:shadowRadius="1"
+        android:text="SOUND"
+        android:textColor="@color/buttonColor"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTitle" />
+
+    <LinearLayout
+        android:id="@+id/soundLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/soundTitle">
+
+        <!-- Sound Toggle -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sound Effects"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/rajdhani_medium"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/soundSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:trackTint="@color/paragraph"
+                android:thumbTint="@color/buttonColor" />
+        </LinearLayout>
+
+        <!-- Volume Control -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Volume: "
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/rajdhani_medium"
+                android:textSize="16sp" />
+
+            <SeekBar
+                android:id="@+id/volumeSeekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="10dp"
+                android:max="100"
+                android:progressBackgroundTint="@color/paragraph"
+                android:progressTint="@color/buttonColor"
+                android:thumbTint="@color/buttonColor" />
+
+            <TextView
+                android:id="@+id/volumeText"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="80%"
+                android:textColor="@color/buttonColor"
+                android:fontFamily="@font/anton"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Game Settings -->
+    <TextView
+        android:id="@+id/gameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/black_ops_one"
+        android:shadowColor="@color/black"
+        android:shadowRadius="1"
+        android:text="GAMEPLAY"
+        android:textColor="@color/buttonColor"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/soundLayout" />
+
+    <LinearLayout
+        android:id="@+id/gameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTitle">
+
+        <!-- Vibration Toggle -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Vibration"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/rajdhani_medium"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/vibrationSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:trackTint="@color/paragraph"
+                android:thumbTint="@color/buttonColor" />
+        </LinearLayout>
+
+        <!-- Timer Toggle -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Timer"
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/rajdhani_medium"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/timerSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:trackTint="@color/paragraph"
+                android:thumbTint="@color/buttonColor" />
+        </LinearLayout>
+
+        <!-- Timer Duration -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration: "
+                android:textColor="@color/textColor"
+                android:fontFamily="@font/rajdhani_medium"
+                android:textSize="16sp" />
+
+            <SeekBar
+                android:id="@+id/timerSeekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="10dp"
+                android:max="7"
+                android:progress="4"
+                android:progressBackgroundTint="@color/paragraph"
+                android:progressTint="@color/buttonColor"
+                android:thumbTint="@color/buttonColor" />
+
+            <TextView
+                android:id="@+id/timerText"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="7 sec"
+                android:textColor="@color/buttonColor"
+                android:fontFamily="@font/anton"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:width="150sp"
+        android:height="40sp"
+        android:backgroundTint="@color/buttonColor"
+        android:onClick="saveSettings"
+        android:text="Save Settings"
+        android:textColor="@color/black"
+        android:fontFamily="@font/rajdhani_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameLayout" />
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="goBack"
+        android:src="@drawable/backplay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/backText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/anton"
+        android:text="Back"
+        android:textColor="@color/paragraph"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/backButton"
+        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintTop_toTopOf="@+id/backButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

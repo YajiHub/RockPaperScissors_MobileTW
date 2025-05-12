@@ -6,67 +6,138 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainColor"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/oswald"
         android:text="@string/welcome_message"
         android:textAlignment="center"
         android:textColor="@color/textColor"
-        android:textSize="37.81sp"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:fontFamily="@font/oswald"
-        android:textSize="15sp"
-        android:text="@string/shortIntro"
-        android:textAlignment="textEnd"
-        android:textColor="@color/textColor"
+    <View
+        android:id="@+id/topDecoLine"
+        android:layout_width="100dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/buttonColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/rajdhani"
+        android:lineSpacingExtra="2dp"
+        android:text="@string/shortIntro"
+        android:textAlignment="center"
+        android:textColor="@color/paragraph"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topDecoLine" />
+
     <Button
         android:id="@+id/playButton"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/buttonColor"
+        android:fontFamily="@font/rajdhani_medium"
+        android:onClick="Play"
+        android:text="@string/play"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <LinearLayout
+        android:id="@+id/menuButtonsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
-        android:backgroundTint="@color/buttonColor"
-        android:onClick="Play"
-        android:shadowColor="#160E0E"
-        android:text="@string/play"
-        android:textColorLink="@color/textColor"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:strokeColor="@color/black" />
+        app:layout_constraintTop_toBottomOf="@+id/playButton">
+
+        <Button
+            android:id="@+id/statsButton"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            android:backgroundTint="@color/buttonColor"
+            android:fontFamily="@font/rajdhani_medium"
+            android:onClick="openStats"
+            android:text="Stats"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="@color/buttonColor"
+            android:fontFamily="@font/rajdhani_medium"
+            android:onClick="openSettings"
+            android:text="Settings"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/exitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/buttonColor"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/rajdhani_medium"
         android:onClick="Exit"
         android:text="@string/exit"
-        android:textColorLink="@color/textColor"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuButtonsLayout" />
+
+    <View
+        android:id="@+id/bottomDecoLine"
+        android:layout_width="120dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/buttonColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playButton"
-        app:layout_constraintVertical_bias="0.0"
-        app:strokeColor="@color/black" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Version or credits (optional) -->
+    <TextView
+        android:id="@+id/versionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/rajdhani"
+        android:text="@string/byWho"
+        android:textColor="@color/paragraph"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

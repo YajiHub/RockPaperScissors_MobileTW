@@ -34,6 +34,9 @@ public class blankFireGun extends AppCompatActivity {
         anim.setRepeatCount(Animation.INFINITE);
         ((TextView)findViewById(R.id.continueRound)).startAnimation(anim);
 
+        // Play empty gun sound
+        SoundManager.getInstance(this).playGunEmpty();
+
         new Handler().postDelayed(new Runnable(){
 
             @Override

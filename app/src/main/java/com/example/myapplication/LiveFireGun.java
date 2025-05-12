@@ -29,6 +29,9 @@ public class LiveFireGun extends AppCompatActivity {
         Player player = (Player) getIntent().getSerializableExtra("player");
         boolean didPlayerWin = getIntent().getBooleanExtra("didWin", false);
 
+        // Play gunshot sound (use lose sound for now)
+        SoundManager.getInstance(this).playLose();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run(){

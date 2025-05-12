@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -134,7 +135,10 @@ public class FinalHandPicking extends AppCompatActivity {
         TextView timerText = findViewById(R.id.timerText);
         ProgressBar countdown = findViewById(R.id.countdown);
 
-        customTimer = new CustomCountdownTimer(timerText, countdown, 7, 100, new CustomCountdownTimer.OnTimerFinishListener() {
+        // Get timer duration from settings with safe fallback
+        int timerDuration = getTimerDurationFromSettings();
+
+        customTimer = new CustomCountdownTimer(timerText, countdown, timerDuration, 100, new CustomCountdownTimer.OnTimerFinishListener() {
             @Override
             public void onTimerFinish() {
                 // Your end-of-timer logic
@@ -149,13 +153,40 @@ public class FinalHandPicking extends AppCompatActivity {
 
     }
 
+    /**
+     * Safely get timer duration from settings
+     * Returns default value (7) if settings can't be read
+     */
+    private int getTimerDurationFromSettings() {
+        try {
+            SharedPreferences prefs = getSharedPreferences("GameSettings", MODE_PRIVATE);
+
+            // Check if timer is enabled (default true)
+            boolean timerEnabled = prefs.getBoolean("timer_enabled", true);
+
+            if (timerEnabled) {
+                // Get timer progress (0-7) and convert to seconds (3-10)
+                int timerProgress = prefs.getInt("timer_duration", 4); // default is 4 (7 seconds)
+                return 3 + timerProgress; // Convert to actual seconds
+            } else {
+                // Timer disabled in settings, hide it
+                View timerContainer = findViewById(R.id.timerContainer);
+                if (timerContainer != null) {
+                    timerContainer.setVisibility(View.GONE);
+                }
+                return 7; // Still need a value for the timer, even if hidden
+            }
+        } catch (Exception e) {
+            // If anything goes wrong, use default value
+            return 7;
+        }
+    }
+
     public void finalChoose(View cardButton) {
         int tag = (int) cardButton.getTag();
         String tagName = " " + tag;
         int textView1Tag = (int) findViewById(R.id.finalCard1).getTag();
         int textView2Tag = (int) findViewById(R.id.finalCard2).getTag();
-
-//        Toast.makeText(this, "Chosen " + tagName, Toast.LENGTH_SHORT).show();
 
         //if there is no hand picked
         if(chosenHand == -1 ){
@@ -217,6 +248,7 @@ public class FinalHandPicking extends AppCompatActivity {
                 intent.putExtra("russian_roulette", russian_roulette);
             }
             startActivity(intent);
+            overridePendingTransition(R.anim.bounce_in, R.anim.pulse);
             chosenHand = -1;
             finish();
             playerUser = null;

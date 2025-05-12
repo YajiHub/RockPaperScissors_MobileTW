@@ -1,11 +1,12 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,24 +17,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class NormalMode extends AppCompatActivity {
     CustomCountdownTimer customTimer;
-//    static ArrayList<Integer> hands = new ArrayList<>();
-
     Player player;
     Computer_Player computer = new Computer_Player();
     Russian_Roulette russian_roulette;
+    private SoundManager soundManager;
+    private Vibrator vibrator;
 
     //only used for russian roulette mode
     static String roundText;
     static String probabilityOfDyingText;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +39,12 @@ public class NormalMode extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Get system vibrator service
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        // Initialize sound manager
+        soundManager = SoundManager.getInstance(this);
 
         player = (Player) getIntent().getSerializableExtra("player");
         player.hand1 = null;
@@ -74,82 +74,58 @@ public class NormalMode extends AppCompatActivity {
             computer.isPlayerPlayingRussianRoulette = false;
         }
 
-
-        TextView timerText = findViewById(R.id.timerText);
-        ProgressBar countdown = findViewById(R.id.countdown);
-
-        customTimer = new CustomCountdownTimer(timerText, countdown, 7, 100, new CustomCountdownTimer.OnTimerFinishListener() {
-            @Override
-            public void onTimerFinish() {
-                // Timer end logic
-                player.generateHands();
-//                hands.add(player.getHand1().getHandNumber());
-//                hands.add(player.getHand2().getHandNumber());
-                throwHands(null);
-            }
-        });
-
-        customTimer.start();
-//        customTimer.cancel();
-
+        setupTimer();
     }
 
+    /**
+     * Sets up the timer with options from settings
+     */
+    private void setupTimer() {
+        TextView timerText = findViewById(R.id.timerText);
+        ProgressBar countdown = findViewById(R.id.countdown);
+        View timerContainer = findViewById(R.id.timerContainer);
 
+        // Get settings
+        SharedPreferences prefs = getSharedPreferences("GameSettings", MODE_PRIVATE);
+        boolean timerEnabled = prefs.getBoolean("timer_enabled", true);
+
+        if (timerEnabled) {
+            // Get timer duration (default 7)
+            int timerProgress = prefs.getInt("timer_duration", 4);
+            int timerDuration = 3 + timerProgress; // 3-10 seconds
+
+            customTimer = new CustomCountdownTimer(timerText, countdown, timerDuration, 100, new CustomCountdownTimer.OnTimerFinishListener() {
+                @Override
+                public void onTimerFinish() {
+                    // Timer end logic
+                    player.generateHands();
+                    throwHands(null);
+                }
+            });
+
+            customTimer.start();
+            timerContainer.setVisibility(View.VISIBLE);
+        } else {
+            // Hide timer if disabled in settings
+            timerContainer.setVisibility(View.GONE);
+        }
+    }
 
     /*
     Current game is limited to choosing different hands, players are not allowed to have both of their hands
     carry the same card (hand1: Rock, hand2: Rock -> is not allowed)
      */
     public void isChosen(View cardButtons){
+        // Play sound effect for card selection
+        soundManager.playCardSelect();
 
-        /*
-        Tag:
-        1 - Rock
-        2 - Paper
-        3 - Scissor
-        functions to set cards to hand1 and hand2
+        // Add vibration if enabled
+        SharedPreferences prefs = getSharedPreferences("GameSettings", MODE_PRIVATE);
+        boolean vibrationEnabled = prefs.getBoolean("vibration_enabled", true);
 
-        at start that card is put to hand1 and then if another different card is chosen put to hand 2
-        but if hand1 has rock and user taps rock again then both hand1 and hand2 should contain rock and now both hands are occupied
-
-        if both hands are occupied then if both hands have same hand if the user picks that same hand again
-        then it erases the duplication meaning the user chose to unselect that hand
-
-        if both hands are occupied but both hands have different hand then if hand1 has rock and hand2 has paper
-        if user taps rock again then the rock would be unselected thus the user would then has paper as selected hand
-        but if user picks different card like scissor then that hand1 which is the first chosen would be replaced with scissor like first in first our
-
-         */
-
-
-//
-//
-//        if(player.getHand1() == null || player.getHand2() == null){
-//            if(player.getHand1() == null){
-//                player.setHand1(tag);
-//            }else{
-//                player.setHand2(tag);
-//            }
-//        }else{
-//            if(player.getHand1().getHandNumber() == tag && player.getHand2().getHandNumber() == tag){
-//                if(player.getHand1().getHandNumber() != tag){
-//                    player.setHand1(tag);
-//                }else{
-//                    player.hand2 = null;
-//                }
-//            }else{
-//                if(player.getHand1().getHandNumber() != tag || player.getHand2().getHandNumber() != tag){
-//                    player.setHand1(tag);
-//                }else{
-//                    if(player.getHand1().getHandNumber() == tag){
-//                        player.setHand1(player.getHand2().getHandNumber());
-//                        player.hand2 = null;
-//                    }else{
-//                        player.hand2 = null;
-//                    }
-//                }
-//            }
-//        }
+        if (vibrationEnabled && vibrator != null) {
+            vibrator.vibrate(50); // 50ms vibration
+        }
 
         int tag = Integer.parseInt(cardButtons.getTag().toString());
 
@@ -175,7 +151,6 @@ public class NormalMode extends AppCompatActivity {
 
         // reloading the hints after any changes
         updateCardHints();
-
     }
 
     private void updateCardHints() {
@@ -205,13 +180,14 @@ public class NormalMode extends AppCompatActivity {
         }
     }
 
-
     public void forfeitGame(View forfeitButton) {
+        // Play button click sound
+        soundManager.playButtonClick();
+
         if (customTimer != null) {
             customTimer.cancel();
             customTimer = null;
         }
-//        hands.clear();
         finish();
     }
 
@@ -219,14 +195,18 @@ public class NormalMode extends AppCompatActivity {
         if(player.getHand1() == null || player.getHand2() == null){
             Toast.makeText(this, "Please choose two hands", Toast.LENGTH_SHORT).show();
         }else{
+            // Play button click sound
+            soundManager.playButtonClick();
+
             // Cancel the timer
             if (customTimer != null) {
                 customTimer.cancel();
                 customTimer = null;
             }
 
+            // Stop all sounds before transition
+            soundManager.stopAllSounds();
 
-//            player.setPlayerHands(hands.get(0), hands.get(1));
             Intent intent = new Intent(this, showChosenCards.class);
             intent.putExtra("player", player);
             computer.generateHands();
@@ -238,9 +218,7 @@ public class NormalMode extends AppCompatActivity {
             }
             startActivity(intent);
             finish();
-//            hands.clear();
         }
-
     }
 
     @Override
@@ -252,4 +230,19 @@ public class NormalMode extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Stop all sounds when leaving the activity
+        soundManager.stopAllSounds();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (customTimer != null) {
+            customTimer.cancel();
+            customTimer = null;
+        }
+    }
 }

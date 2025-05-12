@@ -44,4 +44,45 @@ you win or fall to the games mystery.</string>
     <string name="playNormal">Play Normal Mode</string>
 
 
+
+    <!-- New strings for Stats Activity -->
+    <string name="stats_title">GAME STATISTICS</string>
+    <string name="normal_mode_title">NORMAL MODE</string>
+    <string name="russian_mode_title">RUSSIAN ROULETTE</string>
+    <string name="wins">Wins</string>
+    <string name="losses">Losses</string>
+    <string name="ties">Ties</string>
+    <string name="survived">Survived</string>
+    <string name="deaths">Deaths</string>
+    <string name="victories">Victories</string>
+    <string name="total_games">Total Games</string>
+    <string name="win_rate">Win Rate</string>
+    <string name="reset_stats">Reset Stats</string>
+
+    <!-- New strings for Settings Activity -->
+    <string name="settings_title">SETTINGS</string>
+    <string name="sound_title">SOUND</string>
+    <string name="gameplay_title">GAMEPLAY</string>
+    <string name="sound_effects">Sound Effects</string>
+    <string name="volume">Volume</string>
+    <string name="vibration">Vibration</string>
+    <string name="timer">Timer</string>
+    <string name="timer_duration">Duration</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="back">Back</string>
+
+    <!-- Updated menu strings -->
+    <string name="stats">Stats</string>
+    <string name="settings">Settings</string>
+
+    <!-- Animation and UI strings -->
+    <string name="loading">Loading...</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="game_starting">Game Starting...</string>
+
+
+
+    <string name="byWho">v2.0 by Jopur Jay Montecillo II</string>
+
+
 </resources>
