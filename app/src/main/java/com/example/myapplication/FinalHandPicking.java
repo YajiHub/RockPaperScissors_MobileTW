@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class FinalHandPicking extends AppCompatActivity {
+    private SoundManager soundManager;
 
     CustomCountdownTimer customTimer;
 
@@ -39,6 +40,9 @@ public class FinalHandPicking extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Initialize sound manager
+        soundManager = SoundManager.getInstance(this);
 
         Player player = (Player) getIntent().getSerializableExtra("player");
         Computer_Player computer = (Computer_Player) getIntent().getSerializableExtra("computer");
@@ -183,6 +187,10 @@ public class FinalHandPicking extends AppCompatActivity {
     }
 
     public void finalChoose(View cardButton) {
+        // Play sound effect for card selection
+        soundManager.playCardSelect();
+
+
         int tag = (int) cardButton.getTag();
         String tagName = " " + tag;
         int textView1Tag = (int) findViewById(R.id.finalCard1).getTag();
