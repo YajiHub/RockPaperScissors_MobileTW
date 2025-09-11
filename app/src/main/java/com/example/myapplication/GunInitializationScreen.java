@@ -37,11 +37,9 @@ public class GunInitializationScreen extends AppCompatActivity {
         // Initialize sound manager
         soundManager = SoundManager.getInstance(this);
 
-        // Set up animation frames
-        // Make sure these match your image filenames in res/drawable folder
         gunAnimationFrames = new int[] {
-                R.drawable.frame01, // Replace with your actual filenames
-                R.drawable.frame02, // e.g., if you named them frame1.png, frame2.png, etc.
+                R.drawable.frame01,
+                R.drawable.frame02,
                 R.drawable.frame03,
                 R.drawable.frame04,
                 R.drawable.frame05,
