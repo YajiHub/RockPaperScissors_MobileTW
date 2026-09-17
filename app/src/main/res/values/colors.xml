@@ -2,9 +2,28 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="mainColor">#0f0e17</color>
-    <color name="textColor">#fffffe</color>
-    <color name="buttonColor">#ff8906</color>"
-    <color name="paragraph">#a7a9be</color>
-    <color name="red">#FF0000</color>
+    <color name="mainColor">#09090b</color>
+    <color name="textColor">#f8fafc</color>
+    <color name="buttonColor">#181920</color>
+    <color name="paragraph">#94a3b8</color>
+    <color name="red">#f43f5e</color>
+
+    <!-- Casino Obsidian Design Tokens (matching Web SPA) -->
+    <color name="casino_canvas">#09090b</color>
+    <color name="casino_surface">#111216</color>
+    <color name="casino_surface_card">#181920</color>
+    <color name="casino_surface_elevated">#22232c</color>
+    <color name="casino_card_border">#2e303d</color>
+    <color name="casino_card_border_glow">#40f43f5e</color>
+    <color name="casino_emerald">#10b981</color>
+    <color name="casino_crimson">#f43f5e</color>
+    <color name="casino_amber">#f59e0b</color>
+    <color name="casino_gold">#fbbf24</color>
+    <color name="casino_purple">#a78bfa</color>
+    <color name="casino_glow_emerald">#3310b981</color>
+    <color name="casino_glow_crimson">#33f43f5e</color>
+    <color name="casino_text_focus">#ffffff</color>
+    <color name="casino_text_primary">#f8fafc</color>
+    <color name="casino_text_secondary">#94a3b8</color>
+    <color name="casino_text_muted">#64748b</color>
 </resources>

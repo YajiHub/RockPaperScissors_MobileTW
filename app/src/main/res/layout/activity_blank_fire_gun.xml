@@ -8,40 +8,51 @@
     android:background="@drawable/gun"
     tools:context=".blankFireGun">
 
+    <!-- Scrim for contrast -->
+    <View
+        android:id="@+id/scrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#77000000" />
+
+    <!-- Blank Shot Banner -->
     <TextView
         android:id="@+id/blankShotText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:fontFamily="@font/anton"
+        android:background="@drawable/bg_casino_pill"
+        android:fontFamily="@font/black_ops_one"
+        android:letterSpacing="0.08"
+        android:paddingStart="24dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="10dp"
         android:shadowColor="@color/black"
+        android:shadowRadius="8"
         android:text="@string/blankShot"
-        android:textColor="@color/red"
-        android:textSize="20sp"
+        android:textColor="@color/casino_emerald"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/continueRound"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.835" />
+        app:layout_constraintVertical_bias="0.82" />
 
+    <!-- Pulsing Continue Round Indicator -->
     <TextView
         android:id="@+id/continueRound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="202dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/anton"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="@font/rajdhani_bold"
+        android:letterSpacing="0.1"
         android:shadowColor="@color/black"
+        android:shadowRadius="6"
         android:text="@string/continueRound"
-        android:textColor="@color/red"
-        android:textSize="15sp"
+        android:textColor="@color/casino_amber"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-
-         />
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

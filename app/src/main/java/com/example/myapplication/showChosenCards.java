@@ -26,15 +26,19 @@ public class showChosenCards extends AppCompatActivity {
         });
 
 
-        Player player = (Player) getIntent().getSerializableExtra("player");
-        Computer_Player computer = (Computer_Player) getIntent().getSerializableExtra("computer");
+        Player rawPlayer = (Player) getIntent().getSerializableExtra("player");
+        if (rawPlayer == null) {
+            rawPlayer = new Player();
+            rawPlayer.generateHands();
+        }
+        final Player player = rawPlayer;
 
-
-
-        String number = Integer.toString(player.getHand1().getHandNumber());
-        String number2 = Integer.toString(player.getHand2().getHandNumber());
-        String computer1 = Integer.toString(computer.getHand1().getHandNumber());
-        String computer2 = Integer.toString(computer.getHand2().getHandNumber());
+        Computer_Player rawComputer = (Computer_Player) getIntent().getSerializableExtra("computer");
+        if (rawComputer == null) {
+            rawComputer = new Computer_Player();
+            rawComputer.generateHands();
+        }
+        final Computer_Player computer = rawComputer;
 
 //        String hands = number + "," + number2 + "Enemy: " + computer1 + "," + computer2;
 //        ((TextView)findViewById(R.id.debug)).setText(hands);

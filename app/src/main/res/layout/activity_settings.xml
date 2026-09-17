@@ -5,254 +5,275 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainColor"
+    android:background="@color/casino_canvas"
     tools:context=".SettingsActivity">
+
+    <!-- Top Ambient Badge -->
+    <TextView
+        android:id="@+id/settingsBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_casino_pill"
+        android:fontFamily="@font/rajdhani_bold"
+        android:letterSpacing="0.15"
+        android:paddingStart="16dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="5dp"
+        android:text="SYSTEM CONFIGURATION"
+        android:textColor="@color/casino_emerald"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/settingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/anton"
+        android:letterSpacing="0.05"
         android:shadowColor="@color/black"
-        android:shadowRadius="2"
-        android:text="SETTINGS"
-        android:textColor="@color/textColor"
-        android:textSize="32sp"
+        android:shadowRadius="4"
+        android:text="GAMEPLAY SETTINGS"
+        android:textColor="@color/white"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsBadge" />
 
-    <!-- Sound Settings -->
-    <TextView
-        android:id="@+id/soundTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/black_ops_one"
-        android:shadowColor="@color/black"
-        android:shadowRadius="1"
-        android:text="SOUND"
-        android:textColor="@color/buttonColor"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsTitle" />
-
+    <!-- Audio Settings Card -->
     <LinearLayout
-        android:id="@+id/soundLayout"
+        android:id="@+id/soundCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_casino_card"
         android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soundTitle">
+        app:layout_constraintTop_toBottomOf="@+id/settingsTitle">
+
+        <TextView
+            android:id="@+id/soundTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rajdhani_bold"
+            android:letterSpacing="0.1"
+            android:text="AUDIO CONTROLS"
+            android:textColor="@color/casino_emerald"
+            android:textSize="13sp" />
 
         <!-- Sound Toggle -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="14dp"
             android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Sound Effects"
-                android:textColor="@color/textColor"
                 android:fontFamily="@font/rajdhani_medium"
-                android:textSize="16sp" />
+                android:text="Sound Effects"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <Switch
                 android:id="@+id/soundSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:trackTint="@color/paragraph"
-                android:thumbTint="@color/buttonColor" />
+                android:thumbTint="@color/casino_emerald"
+                android:trackTint="@color/casino_card_border" />
         </LinearLayout>
 
-        <!-- Volume Control -->
+        <!-- Volume Slider -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_marginTop="14dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Volume: "
-                android:textColor="@color/textColor"
                 android:fontFamily="@font/rajdhani_medium"
-                android:textSize="16sp" />
+                android:text="Volume"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <SeekBar
                 android:id="@+id/volumeSeekBar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="10dp"
                 android:max="100"
-                android:progressBackgroundTint="@color/paragraph"
-                android:progressTint="@color/buttonColor"
-                android:thumbTint="@color/buttonColor" />
+                android:progressBackgroundTint="@color/casino_card_border"
+                android:progressTint="@color/casino_emerald"
+                android:thumbTint="@color/casino_emerald" />
 
             <TextView
                 android:id="@+id/volumeText"
-                android:layout_width="40dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:text="80%"
-                android:textColor="@color/buttonColor"
                 android:fontFamily="@font/anton"
-                android:textSize="16sp" />
+                android:gravity="end"
+                android:text="80%"
+                android:textColor="@color/casino_emerald"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Game Settings -->
-    <TextView
-        android:id="@+id/gameTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/black_ops_one"
-        android:shadowColor="@color/black"
-        android:shadowRadius="1"
-        android:text="GAMEPLAY"
-        android:textColor="@color/buttonColor"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soundLayout" />
-
+    <!-- Gameplay Settings Card -->
     <LinearLayout
-        android:id="@+id/gameLayout"
+        android:id="@+id/gameCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_casino_card"
         android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameTitle">
+        app:layout_constraintTop_toBottomOf="@+id/soundCard">
+
+        <TextView
+            android:id="@+id/gameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rajdhani_bold"
+            android:letterSpacing="0.1"
+            android:text="TACTICAL GAMEPLAY"
+            android:textColor="@color/casino_amber"
+            android:textSize="13sp" />
 
         <!-- Vibration Toggle -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="14dp"
             android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Vibration"
-                android:textColor="@color/textColor"
                 android:fontFamily="@font/rajdhani_medium"
-                android:textSize="16sp" />
+                android:text="Haptic Feedback"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <Switch
                 android:id="@+id/vibrationSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:trackTint="@color/paragraph"
-                android:thumbTint="@color/buttonColor" />
+                android:thumbTint="@color/casino_amber"
+                android:trackTint="@color/casino_card_border" />
         </LinearLayout>
 
         <!-- Timer Toggle -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="14dp"
             android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Timer"
-                android:textColor="@color/textColor"
                 android:fontFamily="@font/rajdhani_medium"
-                android:textSize="16sp" />
+                android:text="Turn Countdown Timer"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <Switch
                 android:id="@+id/timerSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:trackTint="@color/paragraph"
-                android:thumbTint="@color/buttonColor" />
+                android:thumbTint="@color/casino_amber"
+                android:trackTint="@color/casino_card_border" />
         </LinearLayout>
 
         <!-- Timer Duration -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_marginTop="14dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Duration: "
-                android:textColor="@color/textColor"
                 android:fontFamily="@font/rajdhani_medium"
-                android:textSize="16sp" />
+                android:text="Limit"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <SeekBar
                 android:id="@+id/timerSeekBar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="10dp"
                 android:max="7"
                 android:progress="4"
-                android:progressBackgroundTint="@color/paragraph"
-                android:progressTint="@color/buttonColor"
-                android:thumbTint="@color/buttonColor" />
+                android:progressBackgroundTint="@color/casino_card_border"
+                android:progressTint="@color/casino_amber"
+                android:thumbTint="@color/casino_amber" />
 
             <TextView
                 android:id="@+id/timerText"
-                android:layout_width="60dp"
+                android:layout_width="72dp"
                 android:layout_height="wrap_content"
-                android:text="7 sec"
-                android:textColor="@color/buttonColor"
                 android:fontFamily="@font/anton"
-                android:textSize="16sp" />
+                android:gravity="end"
+                android:text="7 seconds"
+                android:textColor="@color/casino_amber"
+                android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Save Button -->
+    <!-- Save Settings Action Button -->
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:width="150sp"
-        android:height="40sp"
-        android:backgroundTint="@color/buttonColor"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_btn_primary"
+        android:fontFamily="@font/rajdhani_bold"
+        android:letterSpacing="0.08"
         android:onClick="saveSettings"
-        android:text="Save Settings"
-        android:textColor="@color/black"
-        android:fontFamily="@font/rajdhani_medium"
+        android:text="SAVE SETTINGS"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/gameCard" />
 
-    <!-- Back Button -->
+    <!-- Back Navigation Footer -->
     <ImageView
         android:id="@+id/backButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="28dp"
+        android:contentDescription="Go Back"
         android:onClick="goBack"
         android:src="@drawable/backplay"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -263,10 +284,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:fontFamily="@font/anton"
-        android:text="Back"
-        android:textColor="@color/paragraph"
-        android:textSize="11sp"
+        android:fontFamily="@font/rajdhani_bold"
+        android:letterSpacing="0.08"
+        android:onClick="goBack"
+        android:text="BACK"
+        android:textColor="@color/casino_text_secondary"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/backButton"
         app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="@+id/backButton" />

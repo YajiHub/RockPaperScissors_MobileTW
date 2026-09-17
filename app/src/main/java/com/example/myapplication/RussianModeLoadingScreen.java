@@ -37,7 +37,12 @@ public class RussianModeLoadingScreen extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(RussianModeLoadingScreen.this, GunInitializationScreen.class);
-                intent.putExtra("player", (Player) intent.getSerializableExtra("player"));
+                Player player = (Player) getIntent().getSerializableExtra("player");
+                if (player == null) {
+                    player = new Player();
+                    player.isPlayerPlayingRussianRoulette = true;
+                }
+                intent.putExtra("player", player);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();

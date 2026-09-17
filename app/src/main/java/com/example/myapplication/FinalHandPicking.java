@@ -191,10 +191,24 @@ public class FinalHandPicking extends AppCompatActivity {
         soundManager.playCardSelect();
 
 
-        int tag = (int) cardButton.getTag();
-        String tagName = " " + tag;
-        int textView1Tag = (int) findViewById(R.id.finalCard1).getTag();
-        int textView2Tag = (int) findViewById(R.id.finalCard2).getTag();
+        int tag = -1;
+        if (cardButton != null && cardButton.getTag() != null) {
+            try {
+                tag = Integer.parseInt(cardButton.getTag().toString());
+            } catch (Exception ignored) {}
+        }
+        if (tag == -1) return;
+
+        int textView1Tag = -1;
+        int textView2Tag = -1;
+        View viewCard1 = findViewById(R.id.finalCard1);
+        View viewCard2 = findViewById(R.id.finalCard2);
+        if (viewCard1 != null && viewCard1.getTag() != null) {
+            try { textView1Tag = Integer.parseInt(viewCard1.getTag().toString()); } catch (Exception ignored) {}
+        }
+        if (viewCard2 != null && viewCard2.getTag() != null) {
+            try { textView2Tag = Integer.parseInt(viewCard2.getTag().toString()); } catch (Exception ignored) {}
+        }
 
         //if there is no hand picked
         if(chosenHand == -1 ){
@@ -220,12 +234,18 @@ public class FinalHandPicking extends AppCompatActivity {
                 }
                 chosenHand = tag;
                 playerUser.setFinalHand(tag);
-            }else{
+            } else {
                 chosenHand = -1;
                 ((TextView)findViewById(R.id.finalCard1)).setText("");
                 ((TextView)findViewById(R.id.finalCard2)).setText("");
             }
         }
+
+        // Toggle glowing selection state on the cards
+        View cardBtn1 = findViewById(R.id.cardButton1);
+        View cardBtn2 = findViewById(R.id.cardButton2);
+        if (cardBtn1 != null) cardBtn1.setSelected(chosenHand == textView1Tag && chosenHand != -1);
+        if (cardBtn2 != null) cardBtn2.setSelected(chosenHand == textView2Tag && chosenHand != -1);
         //closing part of final choose method
     }
 
@@ -266,8 +286,29 @@ public class FinalHandPicking extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (customTimer != null) {
+            customTimer.cancel();
+            customTimer = null;
+        }
+        super.onBackPressed();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (soundManager != null) {
+            soundManager.stopAllSounds();
+        }
+    }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (customTimer != null) {
+            customTimer.cancel();
+            customTimer = null;
+        }
+    }
 }

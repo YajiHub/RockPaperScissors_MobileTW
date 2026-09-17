@@ -27,7 +27,7 @@
         android:layout_width="100dp"
         android:layout_height="2dp"
         android:layout_marginTop="8dp"
-        android:background="@color/buttonColor"
+        android:background="@color/casino_card_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -41,22 +41,22 @@
         android:lineSpacingExtra="2dp"
         android:text="@string/shortIntro"
         android:textAlignment="center"
-        android:textColor="@color/paragraph"
+        android:textColor="@color/casino_text_secondary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topDecoLine" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/playButton"
-        android:layout_width="160dp"
-        android:layout_height="48dp"
+        android:layout_width="180dp"
+        android:layout_height="52dp"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/buttonColor"
-        android:fontFamily="@font/rajdhani_medium"
+        android:background="@drawable/bg_btn_primary"
+        android:fontFamily="@font/rajdhani_bold"
         android:onClick="Play"
         android:text="@string/play"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,44 +73,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playButton">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/statsButton"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="12dp"
-            android:backgroundTint="@color/buttonColor"
+            android:layout_width="110dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_btn_secondary"
             android:fontFamily="@font/rajdhani_medium"
             android:onClick="openStats"
             android:text="Stats"
             android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textColor="@color/casino_text_primary"
+            android:textSize="15sp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/settingsButton"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="12dp"
-            android:backgroundTint="@color/buttonColor"
+            android:layout_width="110dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_btn_secondary"
             android:fontFamily="@font/rajdhani_medium"
             android:onClick="openSettings"
             android:text="Settings"
             android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textColor="@color/casino_text_primary"
+            android:textSize="15sp" />
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/exitButton"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_width="130dp"
+        android:layout_height="42dp"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/red"
+        android:background="@drawable/bg_btn_secondary"
         android:fontFamily="@font/rajdhani_medium"
         android:onClick="Exit"
         android:text="@string/exit"
-        android:textColor="@color/textColor"
-        android:textSize="16sp"
+        android:textColor="@color/casino_crimson"
+        android:textSize="15sp"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +121,7 @@
         android:layout_width="120dp"
         android:layout_height="2dp"
         android:layout_marginBottom="40dp"
-        android:background="@color/buttonColor"
+        android:background="@color/casino_card_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
