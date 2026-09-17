@@ -31,7 +31,6 @@
         <button id="btn-sound-toggle" class="btn-icon" title="Toggle Sound (Mute/Unmute)">🔊</button>
         <button id="btn-open-stats" class="btn-icon" title="View Game Stats">📊</button>
         <button id="btn-open-settings" class="btn-icon" title="Game Settings">⚙️</button>
-        <button id="btn-open-embed" class="btn-icon" title="Portfolio Embed Code">🔗</button>
         <button id="btn-toggle-operator" class="btn-operator-toggle" title="Toggle Recruiter/Operator Dev HUD">
           <span>⚡</span> DEV HUD
         </button>
@@ -369,29 +368,6 @@
     </div>
   </div>
 
-  <!-- Portfolio Embed Modal -->
-  <div id="modal-embed" class="modal-backdrop">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Portfolio Integration Snippet</h3>
-        <button class="modal-close" data-close="modal-embed">✕</button>
-      </div>
-      <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45;">
-        Paste this responsive card or iframe into your <code>portfolio/index.html</code> to embed this game cleanly:
-      </p>
-      <div class="code-box">&lt;!-- Option A: Standalone Project Card --&gt;
-&lt;div class="project-card"&gt;
-  &lt;h3&gt;Two-Hand RPS: Russian Roulette&lt;/h3&gt;
-  &lt;p&gt;Buckshot strategy game with Markov-chain AI and Russian Roulette odds engine.&lt;/p&gt;
-  &lt;a href="https://&lt;username&gt;.github.io/rock-paper-scissors/web/" target="_blank" class="btn"&gt;Play Live Demo ⚔️&lt;/a&gt;
-&lt;/div&gt;
-
-&lt;!-- Option B: Live Modal Iframe Embed --&gt;
-&lt;iframe src="https://&lt;username&gt;.github.io/rock-paper-scissors/web/" width="100%" height="680" style="border: none; border-radius: 16px;" allow="autoplay"&gt;&lt;/iframe&gt;</div>
-      <button id="btn-copy-embed" class="btn-primary" style="width: 100%; font-size: 0.9rem; padding: 10px;">📋 Copy Snippet to Clipboard</button>
-    </div>
-  </div>
-
   <!-- ========================================================================
        OPERATOR & RECRUITER DEV MODE HUD (DRAWER)
        ======================================================================== -->
@@ -471,6 +447,14 @@
         <button id="op-test-blank" class="dev-btn">Test Blank Click</button>
         <button id="op-test-live" class="dev-btn warn">Test Gunshot Blast</button>
       </div>
+    </div>
+
+    <!-- Portfolio Embed Snippet (For Dev / Reviewer) -->
+    <div class="operator-section">
+      <div class="section-label">Portfolio Iframe Snippet</div>
+      <p style="font-size: 0.72rem; color: var(--text-secondary); margin-bottom: 6px;">Live URL: https://yajihub.github.io/RockPaperScissors_MobileTW/</p>
+      <div id="op-embed-code" class="code-box" style="font-size: 0.7rem;">&lt;iframe src="https://yajihub.github.io/RockPaperScissors_MobileTW/" width="100%" height="680" style="border: none; border-radius: 16px;" allow="autoplay"&gt;&lt;/iframe&gt;</div>
+      <button id="btn-copy-embed" class="dev-btn" style="width: 100%;">📋 Copy Iframe Code</button>
     </div>
   </aside>
 

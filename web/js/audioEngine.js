@@ -18,6 +18,7 @@ const SOUND_PATHS = Object.freeze({
 export class AudioEngine {
   constructor() {
     this.audioPool = {};
+    this.activeAudios = new Set();
     this.isMuted = false;
     this.volume = 0.8;
     this.hapticsEnabled = true;
@@ -50,18 +51,37 @@ export class AudioEngine {
 
   setVolume(level) {
     this.volume = Math.max(0, Math.min(1, level));
+    for (const audio of this.activeAudios) {
+      audio.volume = this.volume;
+    }
   }
 
   toggleMute() {
     this.isMuted = !this.isMuted;
+    if (this.isMuted) {
+      this.stopAll();
+    }
     return this.isMuted;
   }
 
   setMuted(muted) {
     this.isMuted = Boolean(muted);
+    if (this.isMuted) {
+      this.stopAll();
+    }
   }
 
-  play(soundKey) {
+  stopAll() {
+    for (const audio of this.activeAudios) {
+      try {
+        audio.pause();
+        audio.currentTime = 0;
+      } catch (e) {}
+    }
+    this.activeAudios.clear();
+  }
+
+  play(soundKey, maxDurationMs = null) {
     if (this.isMuted) return;
     this.unlockAudio();
 
@@ -70,7 +90,24 @@ export class AudioEngine {
       // Clone audio to allow overlapping instances
       const clone = original.cloneNode();
       clone.volume = this.volume;
+      this.activeAudios.add(clone);
+
+      clone.onended = () => {
+        this.activeAudios.delete(clone);
+      };
+
+      if (maxDurationMs && maxDurationMs > 0) {
+        setTimeout(() => {
+          try {
+            clone.pause();
+            clone.currentTime = 0;
+          } catch (e) {}
+          this.activeAudios.delete(clone);
+        }, maxDurationMs);
+      }
+
       clone.play().catch(err => {
+        this.activeAudios.delete(clone);
         console.debug('Audio play skipped:', err.message);
       });
     }
@@ -104,8 +141,8 @@ export class AudioEngine {
     this.vibrate([40, 60, 40, 60, 80]);
   }
 
-  playGunCock() {
-    this.play('GUN_COCK');
+  playGunCock(maxDurationMs = 500) {
+    this.play('GUN_COCK', maxDurationMs);
     this.vibrate(80);
   }
 
@@ -114,8 +151,8 @@ export class AudioEngine {
     this.vibrate(100);
   }
 
-  playGunLoad() {
-    this.play('GUN_LOAD');
+  playGunLoad(maxDurationMs = 800) {
+    this.play('GUN_LOAD', maxDurationMs);
     this.vibrate(60);
   }
 
