@@ -26,8 +26,8 @@ public class NormalMode extends AppCompatActivity {
     private Vibrator vibrator;
 
     //only used for russian roulette mode
-    static String roundText;
-    static String probabilityOfDyingText;
+    private String roundText;
+    private String probabilityOfDyingText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

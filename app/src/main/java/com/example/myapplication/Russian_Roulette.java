@@ -17,27 +17,23 @@ public class Russian_Roulette implements Serializable {
 
     private final static Random random = new Random();
     private int currentRound;
-    static int bullet = 1;
-    static int[] rounds = {0,0,0,0,0,0};
-    static int bulletPosition;
-    final int totalRounds = 6;
-    static boolean isBulletFired;
+    private int bullet = 1;
+    private int[] rounds = new int[]{0, 0, 0, 0, 0, 0};
+    private int bulletPosition;
+    private final int totalRounds = 6;
+    private boolean isBulletFired;
 
-    public void gunInitialize(){
-        Arrays.fill(rounds, 0);
+    public void gunInitialize() {
+        rounds = new int[totalRounds];
         currentRound = 0;
-        bulletPosition = random.nextInt(6);
+        bulletPosition = random.nextInt(totalRounds);
         rounds[bulletPosition] = bullet;
+        isBulletFired = false;
     }
 
-
-    public boolean fireRound(){
+    public boolean fireRound() {
         if (currentRound < totalRounds) {
-            if (rounds[currentRound] == 1) {
-                isBulletFired = true;
-            } else {
-                isBulletFired = false;
-            }
+            isBulletFired = (rounds[currentRound] == 1);
             currentRound++;
             return true;
         } else {
@@ -45,19 +41,24 @@ public class Russian_Roulette implements Serializable {
         }
     }
 
-    public int getCurrentRound(){
+    public int getCurrentRound() {
         return currentRound;
     }
 
-    public int getTotalRounds(){
+    public int getTotalRounds() {
         return totalRounds;
     }
 
-    public boolean isShotDeadly(){
+    public boolean isShotDeadly() {
         return isBulletFired;
     }
 
+    public double getDeathProbability() {
+        int remaining = totalRounds - currentRound;
+        return remaining > 0 ? (1.0 / remaining) : 0;
+    }
 
-
-
+    public String getFormattedProbability() {
+        return String.format("%.2f%%", getDeathProbability() * 100);
+    }
 }

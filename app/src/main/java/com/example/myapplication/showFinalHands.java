@@ -18,8 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class showFinalHands extends AppCompatActivity {
-    static Player playerUser;
-    static Computer_Player computerUser;
+    private Player playerUser;
+    private Computer_Player computerUser;
     private SoundManager soundManager;
 
     @Override
