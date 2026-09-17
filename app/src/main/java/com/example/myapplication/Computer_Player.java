@@ -7,9 +7,18 @@ import java.util.HashMap;
 public class Computer_Player extends Player {
     static Random random = new Random();
 
-    // Track game history to identify player patterns
-    private static ArrayList<Integer> playerHistory = new ArrayList<>();
-    private static HashMap<Integer, Integer> playerFinalChoiceFrequency = new HashMap<>();
+    // Track game history to identify player patterns (instance-bound to avoid cross-game leaks)
+    private ArrayList<Integer> playerHistory = new ArrayList<>();
+    private HashMap<Integer, Integer> playerFinalChoiceFrequency = new HashMap<>();
+
+    public int getPlayerHistoryCount() {
+        return playerHistory.size();
+    }
+
+    public void clearHistory() {
+        playerHistory.clear();
+        playerFinalChoiceFrequency.clear();
+    }
 
     // Difficulty levels (0-100, higher is smarter)
     private int difficultyLevel = 95; // Default high difficulty

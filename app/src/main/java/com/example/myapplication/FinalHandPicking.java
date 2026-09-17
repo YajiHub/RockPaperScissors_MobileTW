@@ -21,12 +21,12 @@ public class FinalHandPicking extends AppCompatActivity {
 
     CustomCountdownTimer customTimer;
 
-    static Player playerUser;
-    static Computer_Player computerUser;
+    private Player playerUser;
+    private Computer_Player computerUser;
 
-    static int chosenHand = -1;
+    private int chosenHand = -1;
 
-    static String chosenSymbol = "⭐";
+    private String chosenSymbol = "⭐";
 
 
 

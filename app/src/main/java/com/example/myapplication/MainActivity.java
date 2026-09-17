@@ -23,7 +23,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    public static int clicked = 0;
+    private int clicked = 0;
     private ConstraintLayout mainLayout;
     private boolean menuVisible = false;
 
@@ -40,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mainLayout = findViewById(R.id.main);
+
+        // Modern OnBackPressedDispatcher callback
+        getOnBackPressedDispatcher().addCallback(this, new androidx.activity.OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Exit(null);
+            }
+        });
 
         // Initialize the SoundManager
         SoundManager.getInstance(this);
@@ -110,16 +118,10 @@ public class MainActivity extends AppCompatActivity {
         // Play button click sound
         SoundManager.getInstance(this).playButtonClick();
 
-
         Toast.makeText(this, "Press exit again to close the game!", Toast.LENGTH_SHORT).show();
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask(){
-            @Override
-            public void run(){
-                clicked = 0;
-            }
-        };
-        timer.schedule(task, 3000);
+        new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
+            clicked = 0;
+        }, 3000);
 
         if(clicked > 1){
             clicked = 0;
@@ -136,11 +138,6 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .start();
         }
-    }
-
-    @Override
-    public void onBackPressed(){
-        Exit(null);
     }
 
 

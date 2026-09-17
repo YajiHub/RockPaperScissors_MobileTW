@@ -287,37 +287,41 @@ class AppController {
   // ==========================================================================
   startCylinderLoadingSequence() {
     this.state.setScreen(SCREENS.CYLINDER_INIT);
-    this.audio.playGunLoad();
+    this.audio.stopAll();
 
-    let frame = 1;
-    let loops = 0;
-    const maxLoops = 22; // Spin animation frames duration
+    const sequence = [
+      { frame: '01', delay: 0, text: 'INSERTING ROUND...', action: () => this.audio.playGunLoad(600) },
+      { frame: '02', delay: 200, text: 'INSERTING ROUND...' },
+      { frame: '03', delay: 400, text: 'INSERTING ROUND...' },
+      { frame: '04', delay: 600, text: 'CLOSING CYLINDER...', action: () => this.audio.playButtonClick() },
+      { frame: '05', delay: 800, text: 'SPINNING CYLINDER...', action: () => this.audio.playGunSpin() },
+      { frame: '06', delay: 950, text: 'SPINNING CYLINDER...' },
+      { frame: '07', delay: 1100, text: 'SPINNING CYLINDER...' },
+      { frame: '08', delay: 1250, text: 'COCKING HAMMER...', action: () => this.audio.playGunCock(450) },
+      { frame: '09', delay: 1450, text: 'COCKING HAMMER...' },
+      { frame: '10', delay: 1650, text: 'CHAMBER LOCKED & READY.' }
+    ];
 
-    const interval = setInterval(() => {
-      frame = (frame % 10) + 1;
-      const frameStr = frame < 10 ? `0${frame}` : `${frame}`;
-      if (this.cylinderImg) {
-        this.cylinderImg.src = `assets/images/frame${frameStr}.png`;
+    sequence.forEach(step => {
+      setTimeout(() => {
+        if (this.state.currentScreen !== SCREENS.CYLINDER_INIT) return;
+        if (this.cylinderImg) this.cylinderImg.src = `assets/images/frame${step.frame}.png`;
+        if (this.cylinderStatus && step.text) this.cylinderStatus.textContent = step.text;
+        if (step.action) step.action();
+      }, step.delay);
+    });
+
+    // After animation finishes: cut all audio and transition cleanly
+    setTimeout(() => {
+      if (this.state.currentScreen === SCREENS.CYLINDER_INIT) {
+        this.audio.stopAll();
+        this.startRound();
       }
-
-      loops++;
-      if (loops === 5) {
-        this.audio.playGunSpin();
-        if (this.cylinderStatus) this.cylinderStatus.textContent = 'SPINNING CYLINDER...';
-      }
-
-      if (loops >= maxLoops) {
-        clearInterval(interval);
-        this.audio.playGunCock();
-        if (this.cylinderStatus) this.cylinderStatus.textContent = 'CHAMBER LOCKED & READY.';
-        setTimeout(() => {
-          this.startRound();
-        }, 700);
-      }
-    }, 75);
+    }, 2100);
   }
 
   startRound() {
+    this.audio.stopAll();
     this.state.resetRound();
     this.selectedCards.clear();
     this.state.setScreen(SCREENS.PICK_TWO_HANDS);
