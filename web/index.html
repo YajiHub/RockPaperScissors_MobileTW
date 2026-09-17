@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Two-Hand RPS: Russian Roulette Edition | Interactive Portfolio Demo</title>
+  <meta name="description" content="A strategic twist on Rock-Paper-Scissors combined with a Russian Roulette survival game. Built with pure HTML5, CSS3, and ES6 JavaScript.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/animations.css">
+  <link rel="stylesheet" href="styles/operator.css">
+</head>
+<body>
+  <!-- Fullscreen Screen Flash for Live Gunshot Effect -->
+  <div id="flash-overlay" class="flash-overlay"></div>
+
+  <div id="app-container">
+    <!-- Top Control Bar -->
+    <header class="app-header">
+      <div class="brand-wrapper">
+        <span class="brand-icon">⚔️</span>
+        <span class="brand-title">Two-Hand RPS</span>
+      </div>
+      <div class="nav-controls">
+        <button id="btn-sound-toggle" class="btn-icon" title="Toggle Sound (Mute/Unmute)">🔊</button>
+        <button id="btn-open-stats" class="btn-icon" title="View Game Stats">📊</button>
+        <button id="btn-open-settings" class="btn-icon" title="Game Settings">⚙️</button>
+        <button id="btn-open-embed" class="btn-icon" title="Portfolio Embed Code">🔗</button>
+        <button id="btn-toggle-operator" class="btn-operator-toggle" title="Toggle Recruiter/Operator Dev HUD">
+          <span>⚡</span> DEV HUD
+        </button>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+         SCREEN 1: MAIN MENU
+         ====================================================================== -->
+    <section id="screen-menu" class="screen active">
+      <div class="hero-badge">Buckshot Strategy Survival</div>
+      <h1 class="hero-title">TWO-HAND RPS<br><span style="color: var(--accent-crimson);">RUSSIAN ROULETTE</span></h1>
+      <p class="hero-subtitle">
+        Pick two distinct hands. Reveal opponent's cards. Discard one for the final clash. 
+        In Russian Roulette mode, every loss draws you closer to the fatal chamber.
+      </p>
+      <div class="menu-actions">
+        <button id="btn-menu-play" class="btn-primary">PLAY GAME</button>
+        <button id="btn-menu-stats" class="btn-secondary"><span>📊</span> CAREER STATS</button>
+        <button id="btn-menu-settings" class="btn-secondary"><span>⚙️</span> SETTINGS</button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 2: MODE SELECT
+         ====================================================================== -->
+    <section id="screen-mode-select" class="screen">
+      <div class="hero-badge">Choose Battle Type</div>
+      <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 8px;">SELECT GAME MODE</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 20px;">Play the tactical standard duel or enter the terminal roulette.</p>
+      
+      <div class="mode-grid">
+        <div id="mode-normal-card" class="mode-card normal">
+          <div class="mode-icon">🛡️</div>
+          <h3 class="mode-title">NORMAL MODE</h3>
+          <p class="mode-desc">Traditional Two-Hand RPS matches. Pick 2 cards, inspect the opponent, lock in your final card, and build your win streak.</p>
+        </div>
+
+        <div id="mode-russian-card" class="mode-card russian">
+          <div class="mode-icon">💀</div>
+          <h3 class="mode-title" style="color: var(--accent-crimson);">RUSSIAN ROULETTE</h3>
+          <p class="mode-desc">High stakes survival. A 6-chamber cylinder is loaded with 1 live round. The loser of each clash pulls the trigger.</p>
+        </div>
+      </div>
+      
+      <button id="btn-back-to-menu" class="btn-secondary" style="margin-top: 25px;">← BACK TO HOME</button>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 3: CYLINDER INITIALIZATION (Revolver Spin)
+         ====================================================================== -->
+    <section id="screen-cylinder-init" class="screen">
+      <div class="hero-badge" style="color: var(--accent-crimson); border-color: rgba(239, 68, 68, 0.4);">Gun Loading Sequence</div>
+      <h2 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 10px;">CHAMBERING REVOLVER</h2>
+      
+      <div class="cylinder-wrapper">
+        <img id="cylinder-anim-frame" class="cylinder-frame" src="assets/images/frame01.png" alt="Revolver Cylinder">
+        <div id="cylinder-status-text" class="spin-status">INSERTING ROUND & SPINNING...</div>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.85rem;">6 Chambers • 1 Live Round • Random Position</p>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 4: PICK TWO HANDS (Phase 1)
+         ====================================================================== -->
+    <section id="screen-pick-two" class="screen">
+      <div id="game-hud" class="round-hud">
+        <div class="hud-item">
+          <span class="hud-label">MODE</span>
+          <span id="hud-mode-name" class="hud-value" style="color: var(--accent-cyan);">NORMAL</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">ROUND</span>
+          <span id="hud-round-number" class="hud-value">1</span>
+        </div>
+        <div id="hud-odds-container" class="hud-item" style="display: none;">
+          <span class="hud-label">DEATH ODDS</span>
+          <span id="hud-odds-value" class="hud-value danger">16.7%</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">SCORE</span>
+          <span id="hud-score-display" class="hud-value">0 - 0</span>
+        </div>
+      </div>
+
+      <h2 style="font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 6px;">SELECT TWO DISTINCT HANDS</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">Tap two different cards to prepare your opening bluff.</p>
+
+      <div class="cards-container">
+        <div class="game-card" data-hand="1">
+          <div class="card-selection-badge">✓</div>
+          <span class="card-name">ROCK</span>
+          <img class="card-img" src="assets/images/rock.jpg" alt="Rock">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Beats Scissors</span>
+        </div>
+
+        <div class="game-card" data-hand="2">
+          <div class="card-selection-badge">✓</div>
+          <span class="card-name">PAPER</span>
+          <img class="card-img" src="assets/images/paper.png" alt="Paper">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Beats Rock</span>
+        </div>
+
+        <div class="game-card" data-hand="3">
+          <div class="card-selection-badge">✓</div>
+          <span class="card-name">SCISSORS</span>
+          <img class="card-img" src="assets/images/scissor.png" alt="Scissors">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Beats Paper</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 15px;">
+        <button id="btn-confirm-two-hands" class="btn-primary" style="opacity: 0.5; pointer-events: none;">
+          LOCK IN HANDS (0/2)
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 5: REVEAL HANDS (Phase 2)
+         ====================================================================== -->
+    <section id="screen-reveal" class="screen">
+      <div class="hero-badge">Phase 2: Hand Inspection</div>
+      <h2 style="font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 20px;">BOTH PLAYERS REVEALED</h2>
+
+      <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 550px;">
+        <!-- Computer's Pair -->
+        <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: var(--radius-md); padding: 14px;">
+          <div style="font-size: 0.8rem; color: #fca5a5; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700;">
+            🤖 ENEMY'S CHOSEN PAIR
+          </div>
+          <div id="enemy-reveal-pair" class="cards-container" style="margin: 0; justify-content: center;">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Player's Pair -->
+        <div style="background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.2); border-radius: var(--radius-md); padding: 14px;">
+          <div style="font-size: 0.8rem; color: #67e8f9; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700;">
+            👤 YOUR CHOSEN PAIR
+          </div>
+          <div id="player-reveal-pair" class="cards-container" style="margin: 0; justify-content: center;">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 25px;">
+        <button id="btn-proceed-final-pick" class="btn-primary">CHOOSE FINAL CARD →</button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 6: FINAL PICK (Phase 3)
+         ====================================================================== -->
+    <section id="screen-final-pick" class="screen">
+      <div class="hero-badge">Phase 3: The Elimination</div>
+      <h2 style="font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 4px;">PICK YOUR FINAL HAND</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">Discard one card, play the other. What will the opponent expect?</p>
+
+      <div class="timer-bar-container">
+        <div id="final-pick-timer-fill" class="timer-bar-fill"></div>
+      </div>
+
+      <div id="player-final-options" class="cards-container">
+        <!-- Dynamically rendered 2 cards -->
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 7: CLASH RESOLUTION (Phase 4)
+         ====================================================================== -->
+    <section id="screen-clash" class="screen">
+      <div class="hero-badge">Showdown</div>
+      <h2 id="clash-headline" style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 10px;">CLASH!</h2>
+
+      <div class="clash-stage">
+        <div class="clash-player-side">
+          <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 700;">YOU</span>
+          <div id="clash-player-card" class="game-card" style="cursor: default; pointer-events: none;">
+            <!-- Rendered card -->
+          </div>
+        </div>
+
+        <div class="clash-vs">VS</div>
+
+        <div class="clash-enemy-side">
+          <span style="font-size: 0.8rem; color: var(--accent-crimson); font-weight: 700;">OPPONENT</span>
+          <div id="clash-enemy-card" class="game-card" style="cursor: default; pointer-events: none;">
+            <!-- Rendered card -->
+          </div>
+        </div>
+      </div>
+
+      <div id="clash-outcome-banner" style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin: 15px 0;">
+        <!-- Victory / Defeat / Tie Text -->
+      </div>
+
+      <button id="btn-clash-continue" class="btn-primary" style="margin-top: 10px;">CONTINUE →</button>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 8: RUSSIAN ROULETTE TRIGGER PULL
+         ====================================================================== -->
+    <section id="screen-trigger" class="screen">
+      <div class="hero-badge" style="color: var(--accent-crimson); border-color: rgba(239, 68, 68, 0.4);">
+        Russian Roulette Chamber #<span id="trigger-chamber-num">1</span>
+      </div>
+      <h2 id="trigger-headline" style="font-family: var(--font-serif); font-size: 1.8rem; color: #fff;">
+        PLAYER LOSES ROUND
+      </h2>
+      <p id="trigger-subtext" style="color: var(--text-secondary); font-size: 0.95rem;">
+        The revolver is aimed at you. Chamber odds of firing: <strong id="trigger-odds-badge" class="danger">16.7%</strong>.
+      </p>
+
+      <div class="trigger-stage">
+        <img id="trigger-gun-img" class="revolver-art" src="assets/images/gun.png" alt="Revolver">
+        <button id="btn-pull-trigger" class="btn-primary" style="background: linear-gradient(135deg, #ef4444 0%, #7f1d1d 100%); font-size: 1.25rem;">
+          PULL TRIGGER 💥
+        </button>
+      </div>
+
+      <div id="trigger-result-msg" style="font-family: var(--font-mono); font-size: 1.1rem; min-height: 28px; margin-top: 10px;">
+        <!-- Blank or Live message -->
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 9: GAME OVER
+         ====================================================================== -->
+    <section id="screen-game-over" class="screen">
+      <div class="hero-badge">Game Finished</div>
+      <h1 id="game-over-title" class="hero-title" style="margin-bottom: 8px;">VICTORY</h1>
+      <p id="game-over-subtitle" class="hero-subtitle">You survived the roulette and bested the AI.</p>
+
+      <div class="stats-grid" style="width: 100%; max-width: 440px; margin-bottom: 25px;">
+        <div class="stat-box">
+          <div id="go-stat-rounds" class="num">1</div>
+          <div class="lbl">Rounds Played</div>
+        </div>
+        <div class="stat-box">
+          <div id="go-stat-streak" class="num">0</div>
+          <div class="lbl">Current Streak</div>
+        </div>
+      </div>
+
+      <div class="menu-actions">
+        <button id="btn-play-again" class="btn-primary">PLAY AGAIN</button>
+        <button id="btn-game-over-menu" class="btn-secondary">MAIN MENU</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========================================================================
+       MODALS: STATS, SETTINGS, EMBED
+       ======================================================================== -->
+
+  <!-- Stats Modal -->
+  <div id="modal-stats" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Career Statistics</h3>
+        <button class="modal-close" data-close="modal-stats">✕</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div id="stat-total-games" class="num">0</div>
+          <div class="lbl">Total Matches</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-win-rate" class="num">0.0%</div>
+          <div class="lbl">Win Rate</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-normal-wins" class="num">0</div>
+          <div class="lbl">Normal Wins</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-normal-losses" class="num">0</div>
+          <div class="lbl">Normal Losses</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-russian-wins" class="num" style="color: var(--accent-green);">0</div>
+          <div class="lbl">Roulette Survivals</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-russian-deaths" class="num" style="color: var(--accent-crimson);">0</div>
+          <div class="lbl">Fatal Chamber Hits</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-best-streak" class="num">0</div>
+          <div class="lbl">Best Win Streak</div>
+        </div>
+        <div class="stat-box">
+          <div id="stat-survival-rate" class="num">100%</div>
+          <div class="lbl">Roulette Survival Rate</div>
+        </div>
+      </div>
+      <button id="btn-reset-stats" class="btn-secondary" style="width: 100%; color: #fca5a5; border-color: rgba(239, 68, 68, 0.3);">
+        🗑️ Reset All Statistics
+      </button>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="modal-settings" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Game Settings</h3>
+        <button class="modal-close" data-close="modal-settings">✕</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div>
+          <label style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 6px;">Master Audio Volume</label>
+          <input id="setting-volume-slider" type="range" min="0" max="1" step="0.05" value="0.8" style="width: 100%; accent-color: var(--accent-gold);">
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 6px;">AI Counter-Strategy Difficulty</label>
+          <select id="setting-ai-difficulty" class="dev-select" style="width: 100%;">
+            <option value="EASY">Casual (Easy - 25% Counter)</option>
+            <option value="MEDIUM">Standard (Medium - 55% Counter)</option>
+            <option value="HARD" selected>Veteran (Hard - 80% Markov)</option>
+            <option value="NIGHTMARISH">Unfair (Nightmarish - 95% Transition Matrix)</option>
+          </select>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 0.85rem; color: var(--text-secondary);">Mobile Haptic Feedback</span>
+          <input id="setting-haptics-toggle" type="checkbox" checked style="width: 18px; height: 18px; accent-color: var(--accent-gold);">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 0.85rem; color: var(--text-secondary);">Timer Enabled in Final Pick</span>
+          <input id="setting-timer-toggle" type="checkbox" checked style="width: 18px; height: 18px; accent-color: var(--accent-gold);">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Embed Modal -->
+  <div id="modal-embed" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Portfolio Integration Snippet</h3>
+        <button class="modal-close" data-close="modal-embed">✕</button>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45;">
+        Paste this responsive card or iframe into your <code>portfolio/index.html</code> to embed this game cleanly:
+      </p>
+      <div class="code-box">&lt;!-- Option A: Standalone Project Card --&gt;
+&lt;div class="project-card"&gt;
+  &lt;h3&gt;Two-Hand RPS: Russian Roulette&lt;/h3&gt;
+  &lt;p&gt;Buckshot strategy game with Markov-chain AI and Russian Roulette odds engine.&lt;/p&gt;
+  &lt;a href="https://&lt;username&gt;.github.io/rock-paper-scissors/web/" target="_blank" class="btn"&gt;Play Live Demo ⚔️&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;!-- Option B: Live Modal Iframe Embed --&gt;
+&lt;iframe src="https://&lt;username&gt;.github.io/rock-paper-scissors/web/" width="100%" height="680" style="border: none; border-radius: 16px;" allow="autoplay"&gt;&lt;/iframe&gt;</div>
+      <button id="btn-copy-embed" class="btn-primary" style="width: 100%; font-size: 0.9rem; padding: 10px;">📋 Copy Snippet to Clipboard</button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       OPERATOR & RECRUITER DEV MODE HUD (DRAWER)
+       ======================================================================== -->
+  <aside id="operator-drawer" class="operator-drawer">
+    <div class="operator-header">
+      <span class="operator-title">⚡ OPERATOR / DEV HUD</span>
+      <button id="btn-close-operator" class="btn-icon" style="width: 28px; height: 28px; font-size: 0.9rem;">✕</button>
+    </div>
+
+    <!-- Cylinder X-Ray Visualizer -->
+    <div class="operator-section">
+      <div class="section-label">
+        <span>X-Ray Revolver Cylinder</span>
+        <span id="op-cylinder-summary">6 Chambers • 1 Live</span>
+      </div>
+      <div id="op-cylinder-visualizer" class="xray-cylinder">
+        <!-- Chamber nodes generated dynamically -->
+      </div>
+      <div style="font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between; margin-top: 6px;">
+        <span>Current Odds: <strong id="op-live-odds" style="color: var(--accent-gold);">16.7%</strong></span>
+        <span>Bullet at: <strong id="op-bullet-chamber" style="color: var(--accent-crimson);">Chamber #?</strong></span>
+      </div>
+    </div>
+
+    <!-- AI Markov Mind Reader Telemetry -->
+    <div class="operator-section">
+      <div class="section-label">
+        <span>AI Mind Reader Telemetry</span>
+        <span id="op-ai-iq-rate">80% Intel</span>
+      </div>
+      <p style="font-size: 0.72rem; color: var(--text-secondary);">Player Move Frequency Tracking:</p>
+      <div class="telemetry-bars">
+        <div class="telemetry-row">
+          <span>Rock (🪨)</span>
+          <div class="bar-track"><div id="bar-rock-fill" class="bar-fill bar-rock" style="width: 33%;"></div></div>
+          <span id="label-rock-pct">33%</span>
+        </div>
+        <div class="telemetry-row">
+          <span>Paper (📄)</span>
+          <div class="bar-track"><div id="bar-paper-fill" class="bar-fill bar-paper" style="width: 33%;"></div></div>
+          <span id="label-paper-pct">33%</span>
+        </div>
+        <div class="telemetry-row">
+          <span>Scissors (✂️)</span>
+          <div class="bar-track"><div id="bar-scissors-fill" class="bar-fill bar-scissors" style="width: 34%;"></div></div>
+          <span id="label-scissors-pct">34%</span>
+        </div>
+      </div>
+      <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 8px;">
+        Predicted Next Pick: <strong id="op-ai-predicted-pick" style="color: var(--accent-cyan);">Calculating...</strong>
+      </div>
+    </div>
+
+    <!-- Game Balance Tuning Controls -->
+    <div class="operator-section">
+      <div class="section-label">Live Game Tuning</div>
+      <div class="dev-control-group">
+        <label for="op-chamber-capacity">Cylinder Capacity (Chambers: 4 - 8)</label>
+        <select id="op-chamber-capacity" class="dev-select">
+          <option value="4">4 Chambers (High Danger)</option>
+          <option value="5">5 Chambers</option>
+          <option value="6" selected>6 Chambers (Classic)</option>
+          <option value="7">7 Chambers</option>
+          <option value="8">8 Chambers (Extended)</option>
+        </select>
+      </div>
+      <div class="dev-btn-group">
+        <button id="op-btn-force-blank" class="dev-btn">Force Next Blank</button>
+        <button id="op-btn-force-live" class="dev-btn warn">Force Next Live 💥</button>
+      </div>
+    </div>
+
+    <!-- Instant Diagnostic Audio/Visual Triggers -->
+    <div class="operator-section">
+      <div class="section-label">Diagnostic Triggers</div>
+      <div class="dev-btn-group">
+        <button id="op-test-blank" class="dev-btn">Test Blank Click</button>
+        <button id="op-test-live" class="dev-btn warn">Test Gunshot Blast</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main ES6 Application Controller -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
