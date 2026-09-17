@@ -47,6 +47,9 @@ public class NormalMode extends AppCompatActivity {
         soundManager = SoundManager.getInstance(this);
 
         player = (Player) getIntent().getSerializableExtra("player");
+        if (player == null) {
+            player = new Player();
+        }
         player.hand1 = null;
         player.hand2 = null;
         player.finalHand = null;
@@ -57,13 +60,18 @@ public class NormalMode extends AppCompatActivity {
         ((TextView)findViewById(R.id.scissorChosen)).setText("");
 
         if(player.isPlayerPlayingRussianRoulette){
+            if (russian_roulette == null) {
+                russian_roulette = new Russian_Roulette();
+                russian_roulette.gunInitialize();
+            }
             computer.isPlayerPlayingRussianRoulette = true;
             TextView rounds = ((TextView)findViewById(R.id.round));
             TextView probability = ((TextView)findViewById(R.id.probability));
 
+            int remainingRounds = Math.max(1, russian_roulette.getTotalRounds() - russian_roulette.getCurrentRound());
             roundText = "Round: " + (russian_roulette.getCurrentRound()+1) + "/" + russian_roulette.getTotalRounds();
-            Double percent = (double) (((double) 1 / (russian_roulette.getTotalRounds() - russian_roulette.getCurrentRound())) * 100);
-            probabilityOfDyingText = probability.getText().toString() + String.format(" %.2f", percent) + "%";
+            Double percent = (double) (((double) 1 / remainingRounds) * 100);
+            probabilityOfDyingText = "Lethal Odds: " + String.format("%.1f", percent) + "%";
 
             rounds.setText(roundText);
             probability.setText(probabilityOfDyingText);
@@ -124,10 +132,24 @@ public class NormalMode extends AppCompatActivity {
         boolean vibrationEnabled = prefs.getBoolean("vibration_enabled", true);
 
         if (vibrationEnabled && vibrator != null) {
-            vibrator.vibrate(50); // 50ms vibration
+            try {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    vibrator.vibrate(android.os.VibrationEffect.createOneShot(50, android.os.VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    vibrator.vibrate(50);
+                }
+            } catch (Exception ignored) {
+                // Defensive fallback to prevent security crashes
+            }
         }
 
-        int tag = Integer.parseInt(cardButtons.getTag().toString());
+        int tag = -1;
+        if (cardButtons != null && cardButtons.getTag() != null) {
+            try {
+                tag = Integer.parseInt(cardButtons.getTag().toString());
+            } catch (NumberFormatException ignored) {}
+        }
+        if (tag == -1) return;
 
         if (player.getHand1() != null && player.getHand1().getHandNumber() == tag) {
             if (player.hand2 != null) {
@@ -163,21 +185,37 @@ public class NormalMode extends AppCompatActivity {
         paperHint.setText("");
         scissorHint.setText("");
 
-        // Add "⭐" for selected hands
+        View rockBtn = findViewById(R.id.rockBG);
+        View paperBtn = findViewById(R.id.cardButton1);
+        View scissorBtn = findViewById(R.id.paperBG3);
+
+        boolean rockSelected = false;
+        boolean paperSelected = false;
+        boolean scissorSelected = false;
+
+        // Check selected hands
         if (player.getHand1() != null) {
             switch (player.getHand1().getHandNumber()) {
-                case 1: rockHint.setText("⭐"); break;
-                case 2: paperHint.setText("⭐"); break;
-                case 3: scissorHint.setText("⭐"); break;
+                case 1: rockSelected = true; break;
+                case 2: paperSelected = true; break;
+                case 3: scissorSelected = true; break;
             }
         }
         if (player.getHand2() != null) {
             switch (player.getHand2().getHandNumber()) {
-                case 1: rockHint.setText("⭐"); break;
-                case 2: paperHint.setText("⭐"); break;
-                case 3: scissorHint.setText("⭐"); break;
+                case 1: rockSelected = true; break;
+                case 2: paperSelected = true; break;
+                case 3: scissorSelected = true; break;
             }
         }
+
+        if (rockHint != null) rockHint.setText(rockSelected ? "⭐" : "");
+        if (paperHint != null) paperHint.setText(paperSelected ? "⭐" : "");
+        if (scissorHint != null) scissorHint.setText(scissorSelected ? "⭐" : "");
+
+        if (rockBtn != null) rockBtn.setSelected(rockSelected);
+        if (paperBtn != null) paperBtn.setSelected(paperSelected);
+        if (scissorBtn != null) scissorBtn.setSelected(scissorSelected);
     }
 
     public void forfeitGame(View forfeitButton) {

@@ -38,13 +38,18 @@ public class LoadingScreenActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Player player = (Player) intent.getSerializableExtra("player");
-        if(!player.isPlayerPlayingRussianRoulette){
+        if (player == null) {
+            player = new Player();
+            player.isPlayerPlayingRussianRoulette = false;
+        }
+        final Player finalPlayer = (player != null) ? player : new Player();
+        if(!finalPlayer.isPlayerPlayingRussianRoulette){
             new Handler().postDelayed(new Runnable(){
 
                 @Override
                 public void run() {
                     Intent intent = new Intent(LoadingScreenActivity.this, NormalMode.class);
-                    intent.putExtra("player", player);
+                    intent.putExtra("player", finalPlayer);
                     startActivity(intent);
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     finish();
@@ -56,7 +61,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Intent intent = new Intent(LoadingScreenActivity.this, RussianModeLoadingScreen.class);
-                    intent.putExtra("player", player);
+                    intent.putExtra("player", finalPlayer);
                     startActivity(intent);
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     finish();

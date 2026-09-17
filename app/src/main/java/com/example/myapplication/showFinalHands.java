@@ -37,7 +37,21 @@ public class showFinalHands extends AppCompatActivity {
         soundManager = SoundManager.getInstance(this);
 
         Player player = (Player) getIntent().getSerializableExtra("player");
+        if (player == null) {
+            player = new Player();
+        }
+        if (player.getFinalHand() == null) {
+            player.setFinalHand(1);
+        }
+
         Computer_Player computer = (Computer_Player) getIntent().getSerializableExtra("computer");
+        if (computer == null) {
+            computer = new Computer_Player();
+        }
+        if (computer.getFinalHand() == null) {
+            computer.setFinalHand(2);
+        }
+
         Russian_Roulette russianRoulette = (Russian_Roulette) getIntent().getSerializableExtra("russian_roulette");
 
         playerUser = player;

@@ -3,104 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/mainColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/casino_canvas"
     tools:context=".showChosenCards">
 
+    <!-- Enemy Header Badge -->
     <TextView
         android:id="@+id/enemyChosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:fontFamily="@font/rajdhani"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="2dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_casino_pill"
+        android:fontFamily="@font/rajdhani_bold"
+        android:letterSpacing="0.12"
+        android:paddingStart="14dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="5dp"
         android:text="@string/enemyChosen"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/chosen6"
+        android:textColor="@color/casino_crimson"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/chosen6"
-        android:layout_width="91.27dp"
-        android:layout_height="130.6dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="97dp"
-        android:layout_marginEnd="100dp"
-        android:backgroundTint="@color/buttonColor"
-        android:tag="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/finalEnemyCard"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/enemy2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="@font/black_ops_one"
-        android:shadowColor="@color/black"
-        android:shadowRadius="2"
-        android:tag="1"
-        android:text="@string/paper"
-        android:textColor="@color/white"
-        android:textColorHighlight="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/chosen6"
-        app:layout_constraintEnd_toEndOf="@+id/chosen6"
-        app:layout_constraintStart_toStartOf="@+id/chosen6" />
-
-    <ImageView
-        android:id="@+id/enemyChosen2"
-        android:layout_width="85dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="6dp"
-        android:tag="1"
-        app:layout_constraintEnd_toEndOf="@+id/chosen6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/chosen6"
-        app:layout_constraintTop_toTopOf="@+id/chosen6"
-        app:srcCompat="@drawable/paper" />
-
-    <View
-        android:id="@+id/divider8"
-        android:layout_width="409dp"
-        android:layout_height="12dp"
-        android:background="?android:attr/listDivider"
-        android:backgroundTint="@color/buttonColor"
-        android:foregroundTint="@color/buttonColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
+    <!-- Enemy Card 1 (finalEnemyCard) -->
     <ImageButton
         android:id="@+id/finalEnemyCard"
-        android:layout_width="91.27dp"
-        android:layout_height="130.6dp"
-        android:layout_marginStart="100dp"
-        android:backgroundTint="@color/buttonColor"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_casino_card"
+        android:padding="8dp"
         android:tag="2"
-        app:layout_constraintBottom_toBottomOf="@+id/chosen6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/chosen6" />
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toStartOf="@+id/cardCenterGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/enemyChosen" />
 
     <ImageView
         android:id="@+id/finalPlayerCard"
-        android:layout_width="85dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="6dp"
+        android:layout_width="72dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="12dp"
+        android:clickable="false"
+        android:focusable="false"
         android:tag="1"
         app:layout_constraintEnd_toEndOf="@+id/finalEnemyCard"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/finalEnemyCard"
         app:layout_constraintTop_toTopOf="@+id/finalEnemyCard"
         app:srcCompat="@drawable/paper" />
@@ -109,176 +59,208 @@
         android:id="@+id/playerFinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="false"
+        android:focusable="false"
         android:fontFamily="@font/black_ops_one"
-        android:shadowColor="@color/black"
-        android:shadowRadius="2"
+        android:letterSpacing="0.05"
         android:tag="1"
         android:text="@string/paper"
         android:textColor="@color/white"
-        android:textColorHighlight="@color/black"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/finalEnemyCard"
         app:layout_constraintEnd_toEndOf="@+id/finalEnemyCard"
         app:layout_constraintStart_toStartOf="@+id/finalEnemyCard" />
 
-    <View
-        android:id="@+id/divider6"
-        android:layout_width="409dp"
-        android:layout_height="12dp"
-        android:background="?android:attr/listDivider"
-        android:backgroundTint="@color/buttonColor"
-        android:foregroundTint="@color/buttonColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
+    <!-- Enemy Card 2 (chosen6) -->
     <ImageButton
-        android:id="@+id/cardButton2"
-        android:layout_width="91.27dp"
-        android:layout_height="130.6dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="131dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="97dp"
-        android:backgroundTint="@color/buttonColor"
+        android:id="@+id/chosen6"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_casino_card"
+        android:padding="8dp"
         android:tag="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardButton1"
-        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toEndOf="@+id/cardCenterGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/enemyChosen" />
+
+    <ImageView
+        android:id="@+id/enemyChosen2"
+        android:layout_width="72dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="12dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:tag="1"
+        app:layout_constraintEnd_toEndOf="@+id/chosen6"
+        app:layout_constraintStart_toStartOf="@+id/chosen6"
+        app:layout_constraintTop_toTopOf="@+id/chosen6"
+        app:srcCompat="@drawable/paper" />
 
     <TextView
-        android:id="@+id/chosenText2"
+        android:id="@+id/enemy2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="false"
+        android:focusable="false"
         android:fontFamily="@font/black_ops_one"
-        android:shadowColor="@color/black"
-        android:shadowRadius="2"
+        android:letterSpacing="0.05"
         android:tag="1"
         android:text="@string/paper"
         android:textColor="@color/white"
-        android:textColorHighlight="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/cardButton2"
-        app:layout_constraintEnd_toEndOf="@+id/cardButton2"
-        app:layout_constraintStart_toStartOf="@+id/cardButton2" />
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/chosen6"
+        app:layout_constraintEnd_toEndOf="@+id/chosen6"
+        app:layout_constraintStart_toStartOf="@+id/chosen6" />
 
-    <ImageView
-        android:id="@+id/chosenImg2"
-        android:layout_width="85dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="6dp"
-        android:tag="1"
-        app:layout_constraintEnd_toEndOf="@+id/cardButton2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/cardButton2"
-        app:layout_constraintTop_toTopOf="@+id/cardButton2"
-        app:srcCompat="@drawable/paper" />
+    <!-- Center Guideline for symmetrical card docking -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/cardCenterGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
+    <!-- Center Arena Divider & VS Status -->
     <View
-        android:id="@+id/divider4"
-        android:layout_width="409dp"
-        android:layout_height="12dp"
-        android:background="?android:attr/listDivider"
-        android:backgroundTint="@color/buttonColor"
-        android:foregroundTint="@color/buttonColor"
+        android:id="@+id/dividerCenter"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/casino_card_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- VS Badge in Center -->
+    <TextView
+        android:id="@+id/vsBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_casino_pill"
+        android:fontFamily="@font/black_ops_one"
+        android:letterSpacing="0.1"
+        android:paddingStart="16dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="5dp"
+        android:text="VS"
+        android:textColor="@color/casino_amber"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dividerCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dividerCenter" />
+
+    <!-- Player Card 1 (cardButton1) -->
     <ImageButton
         android:id="@+id/cardButton1"
-        android:layout_width="91.27dp"
-        android:layout_height="130.6dp"
-        android:layout_marginStart="100dp"
-        android:backgroundTint="@color/buttonColor"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_casino_card"
+        android:padding="8dp"
         android:tag="2"
-        app:layout_constraintBottom_toBottomOf="@+id/cardButton2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardButton2" />
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/playerChosen"
+        app:layout_constraintEnd_toStartOf="@+id/cardCenterGuideline" />
+
+    <ImageView
+        android:id="@+id/chosenImg1"
+        android:layout_width="72dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="12dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:tag="1"
+        app:layout_constraintEnd_toEndOf="@+id/cardButton1"
+        app:layout_constraintStart_toStartOf="@+id/cardButton1"
+        app:layout_constraintTop_toTopOf="@+id/cardButton1"
+        app:srcCompat="@drawable/paper" />
 
     <TextView
         android:id="@+id/chosenText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="false"
+        android:focusable="false"
         android:fontFamily="@font/black_ops_one"
-        android:shadowColor="@color/black"
-        android:shadowRadius="2"
+        android:letterSpacing="0.05"
         android:tag="1"
         android:text="@string/paper"
         android:textColor="@color/white"
-        android:textColorHighlight="@color/black"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/cardButton1"
         app:layout_constraintEnd_toEndOf="@+id/cardButton1"
-        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="@+id/cardButton1" />
 
+    <!-- Player Card 2 (cardButton2) -->
+    <ImageButton
+        android:id="@+id/cardButton2"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_casino_card"
+        android:padding="8dp"
+        android:tag="2"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/playerChosen"
+        app:layout_constraintStart_toEndOf="@+id/cardCenterGuideline" />
+
     <ImageView
-        android:id="@+id/chosenImg1"
-        android:layout_width="85dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="6dp"
+        android:id="@+id/chosenImg2"
+        android:layout_width="72dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="12dp"
+        android:clickable="false"
+        android:focusable="false"
         android:tag="1"
-        app:layout_constraintEnd_toEndOf="@+id/cardButton1"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/cardButton1"
-        app:layout_constraintTop_toTopOf="@+id/cardButton1"
+        app:layout_constraintEnd_toEndOf="@+id/cardButton2"
+        app:layout_constraintStart_toStartOf="@+id/cardButton2"
+        app:layout_constraintTop_toTopOf="@+id/cardButton2"
         app:srcCompat="@drawable/paper" />
 
-    <View
-        android:id="@+id/divider7"
-        android:layout_width="409dp"
-        android:layout_height="12dp"
-        android:background="?android:attr/listDivider"
-        android:backgroundTint="@color/buttonColor"
-        android:foregroundTint="@color/buttonColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+    <TextView
+        android:id="@+id/chosenText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:fontFamily="@font/black_ops_one"
+        android:letterSpacing="0.05"
+        android:tag="1"
+        android:text="@string/paper"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardButton2"
+        app:layout_constraintEnd_toEndOf="@+id/cardButton2"
+        app:layout_constraintStart_toStartOf="@+id/cardButton2" />
 
-
+    <!-- Player Header Badge -->
     <TextView
         android:id="@+id/playerChosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:fontFamily="@font/rajdhani"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="2dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/bg_casino_pill"
+        android:fontFamily="@font/rajdhani_bold"
+        android:letterSpacing="0.12"
+        android:paddingStart="14dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="5dp"
         android:text="@string/playerChosen"
-        android:textColor="@color/black"
+        android:textColor="@color/casino_emerald"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardButton2" />
-
-
-<!--    <TextView-->
-<!--        android:id="@+id/debug"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="56dp"-->
-<!--        android:layout_marginBottom="56dp"-->
-<!--        android:text="TextView"-->
-<!--        android:textColor="@color/buttonColor"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/divider8"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/chosen6" />-->
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
